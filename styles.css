@@ -67,6 +67,7 @@ header {
 .global-header {
   --global-header-height: 60px;
   background: rgba(var(--core-heat-black-rgb), 0.24);
+  -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(var(--core-heat-white-rgb), 0.16);
   transition: background 250ms ease;
