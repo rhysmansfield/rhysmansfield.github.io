@@ -231,10 +231,34 @@ header {
 
 .global-header__signup-form__wrapper.has-error {
   border-color: #ff0a30;
+  animation: shake 250ms ease;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+  75% {
+    transform: translateX(-6px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .global-header__signup-form__wrapper.has-error input,
 .global-header__signup-form__wrapper.has-error input::placeholder {
+  color: #ff0a30;
+}
+
+.global-header__signup-form__wrapper.has-error button {
+  background: rgba(255, 10, 48, 0.16);
   color: #ff0a30;
 }
 
