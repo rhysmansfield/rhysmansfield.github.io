@@ -323,11 +323,14 @@ const Header = {
         emailAddress.disabled = true;
         button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16"><path stroke="currentColor" stroke-width="2" d="m2 7.41 4.235 4.09L14 4"/></svg>`;
 
-        setTimeout(() => {
-          inputWrapper.classList.add("has-success-complete");
-        }, 5000);
-
         console.log("Submit form with email address: " + emailAddress.value);
+
+        setTimeout(() => {
+          // Reset form
+          inputWrapper.classList.remove("has-success");
+          emailAddress.disabled = false;
+          button.innerHTML = "Get Notified";
+        }, 5000);
       });
     });
   },
