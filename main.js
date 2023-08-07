@@ -68,7 +68,7 @@ const Header = {
     initialMenu: null,
     subMenuLinks: [],
     openSubMenu: {},
-    backSwipeThreshold: 15 /* Pixels user swipes to close sub menu */,
+    backSwipeThreshold: 75 /* Pixels user swipes to close sub menu */,
   },
   signup: {
     cta: null,
@@ -517,6 +517,8 @@ const Header = {
 
       // Calculate the distance swiped
       const distanceSwiped = touchendX - touchstartX;
+
+      console.log(distanceSwiped);
 
       // If direction is left to right and the distance swiped is greater than the threshold, close sub menu
       if (distanceSwiped > backSwipeThreshold) {
