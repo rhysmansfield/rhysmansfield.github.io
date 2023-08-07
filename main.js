@@ -259,9 +259,10 @@ const Header = {
 
     // Add menuAction event listener
     menuAction.addEventListener("click", () => {
+      const openSubMenu = this.getOpenMobileSubMenu();
       // If there is a sub menu open, the menuAction button should close it
-      if (this.getOpenMobileSubMenu() !== null) {
-        this.closeOpenMobileSubMenu();
+      if (openSubMenu !== null) {
+        this.closeMobileSubMenu(openSubMenu.link, openSubMenu.content);
         return;
       }
 
@@ -483,13 +484,12 @@ const Header = {
   /**
    * Close the opened mobile sub menu
    */
-  closeOpenMobileSubMenu() {
-    const { openSubMenu } = this.mobileMenu;
+  closeMobileSubMenu(subMenuLink, subMenuContent) {
     this.mobileMenu.openSubMenu = {};
 
     // Hide sub menu
-    openSubMenu.link.classList.remove("active");
-    openSubMenu.content.classList.remove("active");
+    subMenuLink.classList.remove("active");
+    subMenuContent.classList.remove("active");
 
     // Change menu action icon
     this.mobileMenu.menuAction.classList.remove("sub-menu-active");
@@ -522,7 +522,8 @@ const Header = {
 
       // If direction is left to right and the distance swiped is greater than the threshold, close sub menu
       if (distanceSwiped > backSwipeThreshold) {
-        this.closeOpenMobileSubMenu();
+        const openSubMenu = this.getOpenMobileSubMenu();
+        this.closeMobileSubMenu(openSubMenu.link, openSubMenu.content);
       }
 
       touchstartX = 0;
