@@ -68,6 +68,7 @@ const Header = {
     initialMenu: null,
     subMenuLinks: [],
     openSubMenu: {},
+    backSwipeThreshold: 15 /* Pixels user swipes to close sub menu */,
   },
   signup: {
     cta: null,
@@ -502,6 +503,7 @@ const Header = {
    * @param {HTMLDivElement} menu
    */
   handleMobileSubMenuBackSwipe(menu) {
+    const { backSwipeThreshold } = this.mobileMenu;
     let touchstartX = 0,
       touchendX = 0;
 
@@ -513,12 +515,16 @@ const Header = {
     menu.addEventListener("touchend", (event) => {
       touchendX = event.changedTouches[0].screenX;
 
-      // If direction is left to right, close sub menu
-      if (touchendX > touchstartX) {
+      // Calculate the distance swiped
+      const distanceSwiped = touchendX - touchstartX;
+
+      // If direction is left to right and the distance swiped is greater than the threshold, close sub menu
+      if (distanceSwiped > backSwipeThreshold) {
         this.closeOpenMobileSubMenu();
-        touchstartX = 0;
-        touchendX = 0;
       }
+
+      touchstartX = 0;
+      touchendX = 0;
     });
   },
 };
