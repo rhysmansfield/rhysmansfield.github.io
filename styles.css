@@ -277,6 +277,7 @@ header {
 .global-header__signup-form__wrapper.has-success button {
   background: rgba(48, 192, 79, 0.16);
   color: #30c04f;
+  width: 48px;
 }
 
 .global-header__signup-form__wrapper.has-success-complete {
@@ -321,6 +322,7 @@ header {
   text-decoration: none;
   display: flex;
   align-items: center;
+  justify-content: center;
   background: rgba(var(--core-heat-white-rgb), 0.16);
   color: var(--core-heat-white);
   margin-left: auto;
@@ -329,12 +331,15 @@ header {
   border-radius: 24px;
   white-space: nowrap;
   cursor: pointer;
+  width: 148px;
   height: 33px;
+  transition: width 250ms ease;
 }
 
 @media (max-width: 1012px) {
   .global-header__signup-form button {
     font: var(--mobile-diatype-cta);
+    width: 133px;
     height: 30px;
   }
 }
