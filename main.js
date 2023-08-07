@@ -504,6 +504,7 @@ const Header = {
   handleMobileSubMenuBackSwipe(menu) {
     let touchstartX = 0,
       touchendX = 0;
+
     // Add back swipe event listener to close sub menus
     menu.addEventListener("touchstart", (event) => {
       touchstartX = event.changedTouches[0].screenX;
