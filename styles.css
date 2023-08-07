@@ -163,6 +163,33 @@ header {
   transition: color 250ms ease;
 }
 
+.global-header__menu-item.active,
+.global-header__menu-item:hover {
+  color: var(--core-heat-white);
+}
+
+.global-header__menu-item a span {
+  position: relative;
+}
+
+.global-header__menu-item a span:after {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 100% 0 auto;
+  height: max(1px, 0.05em);
+  background-color: var(--core-heat-white);
+  transform-origin: right top;
+  transform: scaleX(0);
+  transition: transform 250ms ease;
+}
+
+.global-header__menu-item:hover a span:after,
+.global-header__menu-item.active a span:after {
+  transform-origin: left top;
+  transform: scaleX(1);
+}
+
 .global-header__menu-item a {
   padding: 20px 12px;
   cursor: pointer;
@@ -174,12 +201,6 @@ header {
 
 .global-header__menu-item:last-child a {
   padding-right: 0;
-}
-
-.global-header__menu-item.active {
-  color: var(--core-heat-white);
-  text-decoration: underline;
-  text-underline-offset: 4px;
 }
 
 .global-header__signup {
@@ -453,6 +474,7 @@ header {
 .global-header__mega-menu__item-list {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 24px;
   min-width: calc(120px + 24px);
   padding-right: 24px;
@@ -479,18 +501,33 @@ header {
   color: rgba(var(--core-heat-white-rgb), 0.6);
 }
 
-.global-header__mega-menu__item-list a {
+.global-header__mega-menu__item-list a,
+.global-header__mega-menu__item-list a.has-sub-text span:first-child {
+  position: relative;
   font: var(--desktop-diatype-b2);
   color: var(--core-heat-white);
   text-decoration: none;
 }
 
-.global-header__mega-menu__item-list a:not(.has-sub-text):hover {
-  text-decoration: underline;
+.global-header__mega-menu__item-list a:not(.has-sub-text):after,
+.global-header__mega-menu__item-list a.has-sub-text span:first-child:after {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 100% 0 auto;
+  height: max(1px, 0.05em);
+  background-color: var(--core-heat-white);
+  transform-origin: right top;
+  transform: scaleX(0);
+  transition: transform 250ms ease;
 }
 
-.global-header__mega-menu__item-list a.has-sub-text:hover span:first-child {
-  text-decoration: underline;
+.global-header__mega-menu__item-list a:not(.has-sub-text):hover:after,
+.global-header__mega-menu__item-list
+  a.has-sub-text:hover
+  span:first-child:after {
+  transform-origin: left top;
+  transform: scaleX(1);
 }
 
 .global-header__mega-menu__item-list a.has-sub-text span:last-child {
