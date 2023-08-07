@@ -573,6 +573,7 @@ header {
   gap: 40px;
   font: var(--mobile-gt-super-h4);
   text-transform: uppercase;
+  height: 100%;
   opacity: 1;
   visibility: visible;
   transition: opacity 250ms ease, visibility 250ms ease;
@@ -589,6 +590,8 @@ header {
   top: 0;
   left: 0;
   width: 100%;
+  /* 128px - Height of footer, 48px - Height of bottom padding */
+  height: calc(100% - 128px - 48px);
   left: 50%;
   opacity: 0;
   visibility: hidden;

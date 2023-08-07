@@ -268,15 +268,20 @@ const Header = {
       this.toggleMobileMenu();
     });
 
+    // Add subMenuLinks event listeners
     subMenuLinks.forEach((subMenuLink) => {
       const menuId = subMenuLink.getAttribute("data-open-mobile-menu");
       const menu = this.mobileMenu.menu.querySelector(
         `[data-mobile-menu="${menuId}"]`
       );
 
+      // Open sub menu on click
       subMenuLink.addEventListener("click", () => {
         this.openMobileSubMenu(subMenuLink, menu);
       });
+
+      // Handle back swipe on sub menu
+      this.handleMobileSubMenuBackSwipe(menu);
     });
   },
 
@@ -490,6 +495,30 @@ const Header = {
 
     // Fade in initial menu
     this.mobileMenu.initialMenu.classList.toggle("hidden");
+  },
+
+  /**
+   * Handle back swipes on mobile sub menus
+   * @param {HTMLDivElement} menu
+   */
+  handleMobileSubMenuBackSwipe(menu) {
+    let touchstartX = 0,
+      touchendX = 0;
+    // Add back swipe event listener to close sub menus
+    menu.addEventListener("touchstart", (event) => {
+      touchstartX = event.changedTouches[0].screenX;
+    });
+
+    menu.addEventListener("touchend", (event) => {
+      touchendX = event.changedTouches[0].screenX;
+
+      // If direction is left to right, close sub menu
+      if (touchendX > touchstartX) {
+        this.closeOpenMobileSubMenu();
+        touchstartX = 0;
+        touchendX = 0;
+      }
+    });
   },
 };
 
