@@ -141,7 +141,11 @@
             </li>
           </ul>
 
-          <div class="global-header__signup-form__error" style="display: none">
+          <div
+            data-form-error="header-signup-desktop"
+            class="global-header__signup-form__error"
+            style="display: none"
+          >
             Unrecognised Email Address
           </div>
 
@@ -150,9 +154,13 @@
               <button class="global-header__signup-cta">Stay Notified</button>
             </div>
 
-            <form class="global-header__signup-form" style="display: none">
+            <form
+              data-form="header-signup-desktop"
+              class="global-header__signup-form"
+              style="display: none"
+            >
               <div class="global-header__signup-form__wrapper">
-                <input placeholder="Your Email" />
+                <input type="email" placeholder="Your Email" />
                 <button type="submit">Stay Notified</button>
               </div>
             </form>
@@ -210,7 +218,7 @@
               >
                 <path
                   d="M4.2 8h24M4.2 24h24M4.2 16h24"
-                  stroke="#EBF4F7"
+                  stroke="currentColor"
                   stroke-width="1.5"
                 />
               </svg>
@@ -222,7 +230,7 @@
               >
                 <path
                   d="m6.2 26 20-20M6.2 6l20 20"
-                  stroke="#EBF4F7"
+                  stroke="currentColor"
                   stroke-width="1.5"
                 />
               </svg>
@@ -234,7 +242,7 @@
               >
                 <path
                   d="M22.2 3.999 10.2 16l12 12"
-                  stroke="#EBF4F7"
+                  stroke="currentColor"
                   stroke-width="1.5"
                 />
               </svg>
@@ -269,11 +277,12 @@
               </div>
             </div>
 
-            <div style="align-self: flex-end">Country select</div>
+            <div class="global-header__mega-menu__country-selector">
+              Shipping to United Kingdom / £GBP
+            </div>
           </div>
           <div data-menu="2" class="global-header__mega-menu__item">
             <h1 style="font-size: 50px; line-height: normal">Menu 2</h1>
-            content
           </div>
         </div>
 
@@ -297,9 +306,9 @@
                     viewBox="0 0 24 25"
                   >
                     <path
-                      stroke="#EBF4F7"
-                      stroke-width="1.5"
                       d="m8 20.5 8-8-8-8"
+                      stroke="currentColor"
+                      stroke-width="1.5"
                     />
                   </svg>
                 </div>
@@ -316,9 +325,9 @@
                     viewBox="0 0 24 25"
                   >
                     <path
-                      stroke="#EBF4F7"
-                      stroke-width="1.5"
                       d="m8 20.5 8-8-8-8"
+                      stroke="currentColor"
+                      stroke-width="1.5"
                     />
                   </svg>
                 </div>
@@ -379,9 +388,19 @@
             </div>
 
             <div class="global-header__mobile-menu__footer">
-              <form class="global-header__signup-form">
+              <div
+                data-form-error="header-signup-mobile"
+                class="global-header__signup-form__error"
+                style="display: none"
+              >
+                Unrecognised Email Address
+              </div>
+              <form
+                data-form="header-signup-mobile"
+                class="global-header__signup-form"
+              >
                 <div class="global-header__signup-form__wrapper">
-                  <input placeholder="Your Email" />
+                  <input type="email" placeholder="Your Email" />
                   <button type="submit">Stay Notified</button>
                 </div>
               </form>

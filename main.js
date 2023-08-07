@@ -70,9 +70,8 @@ const Header = {
     openSubMenu: {},
   },
   signup: {
-    isOpen: false,
     cta: null,
-    form: null,
+    forms: [],
   },
   scroll: {
     offscreenSpeed: 0.25 /* How fast the header moves offscreen */,
@@ -117,7 +116,7 @@ const Header = {
     this.signup = {
       ...this.signup,
       cta: this.element.querySelector(".global-header__signup-cta"),
-      form: this.element.querySelector(".global-header__signup-form"),
+      forms: this.element.querySelectorAll(".global-header__signup-form"),
     };
 
     // Init height calculation functionality
@@ -187,10 +186,12 @@ const Header = {
    * Initialize the mega menu
    */
   initMegaMenu() {
+    const { menuLinks, menuContentWrapper } = this.megaMenu;
+
     // Add megamenu link event listeners
-    this.megaMenu.menuLinks.forEach((menuLink) => {
+    menuLinks.forEach((menuLink) => {
       const menuId = menuLink.getAttribute("data-open-menu");
-      const menuContent = this.megaMenu.menuContentWrapper.querySelector(
+      const menuContent = menuContentWrapper.querySelector(
         `[data-menu="${menuId}"]`
       );
 
@@ -240,8 +241,10 @@ const Header = {
    * Initialize the mobile menu
    */
   initMobileMenu() {
+    const { menuAction, subMenuLinks } = this.mobileMenu;
+
     // Add menuAction event listener
-    this.mobileMenu.menuAction.addEventListener("click", () => {
+    menuAction.addEventListener("click", () => {
       // If there is a sub menu open, the menuAction button should close it
       if (this.getOpenMobileSubMenu() !== null) {
         this.closeOpenMobileSubMenu();
@@ -252,7 +255,7 @@ const Header = {
       this.toggleMobileMenu();
     });
 
-    this.mobileMenu.subMenuLinks.forEach((subMenuLink) => {
+    subMenuLinks.forEach((subMenuLink) => {
       const menuId = subMenuLink.getAttribute("data-open-mobile-menu");
       const menu = this.mobileMenu.menu.querySelector(
         `[data-mobile-menu="${menuId}"]`
@@ -268,10 +271,64 @@ const Header = {
    * Initialize the header signup
    */
   initHeaderSignup() {
+    const { cta, forms } = this.signup;
+
     // When header cta is clicked, hide cta and show form
-    this.signup.cta.addEventListener("click", () => {
-      this.signup.cta.parentNode.style.display = "none";
-      this.signup.form.style.display = "";
+    cta.addEventListener("click", () => {
+      cta.parentNode.style.display = "none";
+      cta.parentNode.nextElementSibling.style.display = "block";
+    });
+
+    forms.forEach((form) => {
+      const formId = form.getAttribute("data-form");
+      const emailAddress = form.querySelector(`input[type="email"]`);
+      const button = form.querySelector(`button[type="submit"]`);
+      const inputWrapper = emailAddress.parentNode;
+      const error = this.element.querySelector(`[data-form-error="${formId}"]`);
+
+      emailAddress.addEventListener("input", () => {
+        const value = emailAddress.value;
+
+        if (value.length > 0) {
+          inputWrapper.classList.add("has-value");
+        } else {
+          inputWrapper.classList.remove("has-value");
+        }
+
+        inputWrapper.classList.remove("has-error");
+        error.style.display = "none";
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        // Prevent form change if form has submitted
+        if (inputWrapper.classList.contains("has-success")) return;
+
+        const email = emailAddress.value;
+
+        // Validate email address
+        const validEmail = email.match(
+          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+
+        if (!validEmail) {
+          inputWrapper.classList.add("has-error");
+          error.style.display = "";
+          return;
+        }
+
+        // Is valid email address
+        inputWrapper.classList.add("has-success");
+        emailAddress.disabled = true;
+        button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16"><path stroke="currentColor" stroke-width="2" d="m2 7.41 4.235 4.09L14 4"/></svg>`;
+
+        setTimeout(() => {
+          inputWrapper.classList.add("has-success-complete");
+        }, 5000);
+
+        console.log("Submit form with email address: " + emailAddress.value);
+      });
     });
   },
 
@@ -286,7 +343,6 @@ const Header = {
 
   updateHeaderHeight() {
     // Calculate real header height
-    this.element.style.height = "auto";
     const headerHeight = this.element.querySelector(
       ".global-header__wrapper"
     ).offsetHeight;
@@ -294,7 +350,6 @@ const Header = {
       "--global-header-height",
       `${headerHeight}px`
     );
-    this.element.style.height = "";
   },
 
   /**
