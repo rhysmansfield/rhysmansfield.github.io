@@ -85,12 +85,14 @@ header {
     transition: height 250ms ease;
   }
 
-  .global-header.mobile-menu-active {
-    height: 100vh;
-  }
-
+  /* Ensure megamenu doesnt effect mobile menu colour */
   .global-header.mega-menu-active {
     background: rgba(var(--core-heat-black-rgb), 0.24);
+  }
+
+  .global-header.mobile-menu-active {
+    height: 100vh;
+    background: rgba(11, 11, 13, 0.8);
   }
 }
 
