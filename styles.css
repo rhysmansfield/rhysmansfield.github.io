@@ -344,6 +344,11 @@ header {
   }
 }
 
+.global-header__signup-form button span {
+  display: block;
+  overflow: hidden;
+}
+
 .global-header__signup-form button svg {
   width: 16px;
 }

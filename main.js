@@ -329,7 +329,7 @@ const Header = {
           // Reset form
           inputWrapper.classList.remove("has-success");
           emailAddress.disabled = false;
-          button.innerHTML = "Get Notified";
+          button.innerHTML = "<span>Stay Notified</span>";
         }, 5000);
       });
     });
