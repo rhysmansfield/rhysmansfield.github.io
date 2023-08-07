@@ -146,6 +146,8 @@ const Header = {
 
   /**
    * Initialize the scroll functionality
+   * To fix scroll rubberbanding on iOS, we init the animation on first scroll
+   * and then remove the event listener to prevent multiple calls
    */
   initScroll() {
     function updateHeaderTransform() {
@@ -155,7 +157,7 @@ const Header = {
         this.scroll;
 
       if (this.getOpenMegaMenu() !== null || this.mobileMenu.isOpen) {
-        requestAnimationFrame(updateHeaderTransform.bind(this));
+        requestAnimationFrame(updateHeaderTransform);
         return;
       }
 
@@ -175,13 +177,22 @@ const Header = {
       this.element.style.transform = `translateY(${currentTransform}px)`;
       this.scroll.currentTransform = currentTransform;
       this.scroll.previousScroll = previousScroll;
-      requestAnimationFrame(updateHeaderTransform.bind(this));
+      requestAnimationFrame(updateHeaderTransform);
     }
 
-    window.addEventListener("DOMContentLoaded", () => {
+    // Bind updateHeaderTransform to Header
+    updateHeaderTransform = updateHeaderTransform.bind(this);
+
+    function initAnimation() {
       this.scroll.previousScroll = window.scrollY;
-      requestAnimationFrame(updateHeaderTransform.bind(this));
-    });
+      requestAnimationFrame(updateHeaderTransform);
+      window.removeEventListener("scroll", initAnimation);
+    }
+
+    // Bind initAnimation to Header
+    initAnimation = initAnimation.bind(this);
+
+    window.addEventListener("scroll", initAnimation);
   },
 
   /**
