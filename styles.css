@@ -61,7 +61,16 @@ body {
 
 header {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
+}
+
+@media (max-width: 1012px) {
+  header {
+    /* Fix issue where mobile menu has 1px gap at top */
+    top: -1px;
+  }
 }
 
 .global-header {
@@ -91,8 +100,14 @@ header {
   }
 
   .global-header.mobile-menu-active {
-    height: 100vh;
+    height: calc(100vh + 1px);
     background: rgba(11, 11, 13, 0.8);
+  }
+
+  @supports (height: 100dvh) {
+    .global-header.mobile-menu-active {
+      height: calc(100dvh + 1px);
+    }
   }
 }
 
@@ -531,9 +546,15 @@ header {
 
   .global-header__mobile-menu.active {
     opacity: 1;
-    height: calc(100vh - var(--global-header-height));
+    height: calc(100vh - var(--global-header-height) + 1px);
     visibility: visible;
     pointer-events: auto;
+  }
+
+  @supports (height: 100dvh) {
+    .global-header__mobile-menu.active {
+      height: calc(100dvh - var(--global-header-height) + 1px);
+    }
   }
 }
 
@@ -562,9 +583,15 @@ header {
   position: relative;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - var(--global-header-height));
+  height: calc(100vh - var(--global-header-height) + 1px);
   color: var(--core-heat-white);
   padding: 20px 12px 48px;
+}
+
+@supports (height: 100dvh) {
+  .global-header__mobile-menu__wrapper {
+    height: calc(100dvh - var(--global-header-height) + 1px);
+  }
 }
 
 .global-header__mobile-menu__item-wrapper {
