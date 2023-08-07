@@ -154,8 +154,15 @@ const Header = {
       let { previousScroll, currentTransform, offscreenSpeed, onscreenSpeed } =
         this.scroll;
 
+      console.log("UPDATE HEADER TRANSFORM");
+      console.table({
+        scrollY,
+        previousScroll,
+        currentTransform,
+      });
+
       if (this.getOpenMegaMenu() !== null || this.mobileMenu.isOpen) {
-        requestAnimationFrame(updateHeaderTransform.bind(this));
+        //requestAnimationFrame(updateHeaderTransform.bind(this));
         return;
       }
 
@@ -175,11 +182,13 @@ const Header = {
       this.element.style.transform = `translateY(${currentTransform}px)`;
       this.scroll.currentTransform = currentTransform;
       this.scroll.previousScroll = previousScroll;
-      requestAnimationFrame(updateHeaderTransform.bind(this));
+      //requestAnimationFrame(updateHeaderTransform.bind(this));
     }
 
     this.scroll.previousScroll = window.scrollY;
-    requestAnimationFrame(updateHeaderTransform.bind(this));
+    window.addEventListener("wheel", updateHeaderTransform.bind(this));
+    window.addEventListener("touchmove", updateHeaderTransform.bind(this));
+    //requestAnimationFrame(updateHeaderTransform.bind(this));
   },
 
   /**
