@@ -495,7 +495,11 @@ const Header = {
     this.element.classList.remove("mega-menu-active");
 
     // Reset wrapper height
-    if (resetHeight) this.megaMenu.menuContentWrapper.style.height = 0;
+    if (resetHeight) {
+      this.megaMenu.menuContentWrapper.style.height = 0;
+
+      document.dispatchEvent(new CustomEvent("megaMenuClosed"));
+    }
   },
 
   /**
@@ -714,11 +718,16 @@ const InlineCurrencySelector = {
    * Add event listeners
    */
   addEventListeners() {
-    // Add event listener to back button
-    this.backButton.addEventListener("click", () => {
+    function revertSelections() {
       this.setSelectedSite(this.originallySelected.site);
       this.setSelectedCurrency(this.originallySelected.currency);
-    });
+    }
+
+    // Add event listener to back button
+    this.backButton.addEventListener("click", revertSelections.bind(this));
+
+    // Add event listener to mega menu close
+    document.addEventListener("megaMenuClosed", revertSelections.bind(this));
 
     // Add event listener to save button
     this.saveButton.addEventListener("click", () => {
