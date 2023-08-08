@@ -317,8 +317,9 @@
 
                 <ul class="inline-country-selector__item-list">
                   <li
-                    data-toggle-site="UK"
-                    class="inline-country-selector__item active"
+                    data-country-selector-site="UK"
+                    data-country-selector-currencies="GBP, USD, EUR, CAD, AUD, JPY"
+                    class="inline-country-selector__item"
                   >
                     <div class="inline-country-selector__item-flag">
                       <img src="https://via.placeholder.com/1000" />
@@ -344,7 +345,8 @@
                     </div>
                   </li>
                   <li
-                    data-toggle-site="EU"
+                    data-country-selector-site="EU"
+                    data-country-selector-currencies="EUR, SEK"
                     class="inline-country-selector__item"
                   >
                     <div class="inline-country-selector__item-flag">
@@ -370,12 +372,252 @@
                       </div>
                     </div>
                   </li>
+                  <li
+                    data-country-selector-site="US"
+                    data-country-selector-currencies="USD"
+                    class="inline-country-selector__item"
+                  >
+                    <div class="inline-country-selector__item-flag">
+                      <img src="https://via.placeholder.com/1000" />
+                    </div>
+                    <div>
+                      <div class="inline-country-selector__item-title">
+                        <div>US Site</div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 16 17"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-width="2"
+                            d="M2 7.91 6.235 12 14 4.5"
+                          />
+                        </svg>
+                      </div>
+                      <div class="inline-country-selector__item-subtitle">
+                        USD
+                      </div>
+                    </div>
+                  </li>
                 </ul>
               </div>
               <div class="inline-country-selector__currency">
                 <div class="inline-country-selector__col-title">
                   Currency Select
                 </div>
+                <ul class="inline-country-selector__item-list">
+                  <li
+                    data-country-selector-currency="GBP"
+                    class="inline-country-selector__item"
+                  >
+                    <div class="inline-country-selector__item-flag">
+                      <img src="https://via.placeholder.com/1000" />
+                    </div>
+                    <div>
+                      <div class="inline-country-selector__item-title">
+                        <div>GBP</div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 16 17"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-width="2"
+                            d="M2 7.91 6.235 12 14 4.5"
+                          />
+                        </svg>
+                      </div>
+                      <div
+                        data-original-text="Great British Pound"
+                        class="inline-country-selector__item-subtitle"
+                      >
+                        Great British Pound
+                      </div>
+                    </div>
+                  </li>
+                  <li
+                    data-country-selector-currency="USD"
+                    class="inline-country-selector__item"
+                  >
+                    <div class="inline-country-selector__item-flag">
+                      <img src="https://via.placeholder.com/1000" />
+                    </div>
+                    <div>
+                      <div class="inline-country-selector__item-title">
+                        <div>USD</div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 16 17"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-width="2"
+                            d="M2 7.91 6.235 12 14 4.5"
+                          />
+                        </svg>
+                      </div>
+                      <div
+                        data-original-text="US Dollar"
+                        class="inline-country-selector__item-subtitle"
+                      >
+                        US Dollar
+                      </div>
+                    </div>
+                  </li>
+                  <li
+                    data-country-selector-currency="EUR"
+                    class="inline-country-selector__item"
+                  >
+                    <div class="inline-country-selector__item-flag">
+                      <img src="https://via.placeholder.com/1000" />
+                    </div>
+                    <div>
+                      <div class="inline-country-selector__item-title">
+                        <div>EUR</div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 16 17"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-width="2"
+                            d="M2 7.91 6.235 12 14 4.5"
+                          />
+                        </svg>
+                      </div>
+                      <div
+                        data-original-text="Euro"
+                        class="inline-country-selector__item-subtitle"
+                      >
+                        Euro
+                      </div>
+                    </div>
+                  </li>
+                  <li
+                    data-country-selector-currency="CAD"
+                    class="inline-country-selector__item"
+                  >
+                    <div class="inline-country-selector__item-flag">
+                      <img src="https://via.placeholder.com/1000" />
+                    </div>
+                    <div>
+                      <div class="inline-country-selector__item-title">
+                        <div>CAD</div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 16 17"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-width="2"
+                            d="M2 7.91 6.235 12 14 4.5"
+                          />
+                        </svg>
+                      </div>
+                      <div
+                        data-original-text="Canadian Dollar"
+                        class="inline-country-selector__item-subtitle"
+                      >
+                        Canadian Dollar
+                      </div>
+                    </div>
+                  </li>
+                  <li
+                    data-country-selector-currency="AUD"
+                    class="inline-country-selector__item"
+                  >
+                    <div class="inline-country-selector__item-flag">
+                      <img src="https://via.placeholder.com/1000" />
+                    </div>
+                    <div>
+                      <div class="inline-country-selector__item-title">
+                        <div>AUD</div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 16 17"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-width="2"
+                            d="M2 7.91 6.235 12 14 4.5"
+                          />
+                        </svg>
+                      </div>
+                      <div
+                        data-original-text="Australian Dollar"
+                        class="inline-country-selector__item-subtitle"
+                      >
+                        Australian Dollar
+                      </div>
+                    </div>
+                  </li>
+                  <li
+                    data-country-selector-currency="JPY"
+                    class="inline-country-selector__item"
+                  >
+                    <div class="inline-country-selector__item-flag">
+                      <img src="https://via.placeholder.com/1000" />
+                    </div>
+                    <div>
+                      <div class="inline-country-selector__item-title">
+                        <div>JPY</div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 16 17"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-width="2"
+                            d="M2 7.91 6.235 12 14 4.5"
+                          />
+                        </svg>
+                      </div>
+                      <div
+                        data-original-text="Japanese Yen"
+                        class="inline-country-selector__item-subtitle"
+                      >
+                        Japanese Yen
+                      </div>
+                    </div>
+                  </li>
+                  <li
+                    data-country-selector-currency="SEK"
+                    class="inline-country-selector__item"
+                  >
+                    <div class="inline-country-selector__item-flag">
+                      <img src="https://via.placeholder.com/1000" />
+                    </div>
+                    <div>
+                      <div class="inline-country-selector__item-title">
+                        <div>SEK</div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 16 17"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-width="2"
+                            d="M2 7.91 6.235 12 14 4.5"
+                          />
+                        </svg>
+                      </div>
+                      <div
+                        data-original-text="Swedish Krona"
+                        class="inline-country-selector__item-subtitle"
+                      >
+                        Swedish Krona
+                      </div>
+                    </div>
+                  </li>
+                </ul>
               </div>
               <div class="inline-country-selector__button-wrapper">
                 <button
