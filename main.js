@@ -394,6 +394,9 @@ const Header = {
     this.scroll.previousScroll = window.scrollY;
   },
 
+  /**
+   * Update header height CSS variable
+   */
   updateHeaderHeight() {
     // Calculate real header height
     const headerHeight = this.element.querySelector(
@@ -413,6 +416,17 @@ const Header = {
     return Object.keys(this.megaMenu.openMenu).length === 0
       ? null
       : this.megaMenu.openMenu;
+  },
+
+  /**
+   * Update header megamenu height to current open menu
+   */
+  updateMegaMenuHeight() {
+    const openMenu = this.getOpenMegaMenu();
+    if (openMenu === null) return;
+
+    const menuHeight = openMenu.content.offsetHeight;
+    this.megaMenu.menuContentWrapper.style.height = `${menuHeight}px`;
   },
 
   /**
@@ -449,7 +463,7 @@ const Header = {
     menuLink.classList.add("active");
     menuContent.classList.add("active");
 
-    this.megaMenu.menuContentWrapper.style.height = `${menuContent.offsetHeight}px`;
+    this.updateMegaMenuHeight();
     this.element.classList.add("mega-menu-active");
   },
 
@@ -610,5 +624,225 @@ const Header = {
   },
 };
 
-Header.init();
+const InlineCurrencySelector = {
+  element: null,
+  backButton: null,
+  saveButton: null,
+  originallySelected: {},
+  selected: {},
+  sites: [],
+  currencies: [],
+
+  /**
+   * Pass a selector to initialize the magnetic buttons
+   * @param {HTMLDivElement} selector
+   */
+  init(selector) {
+    this.element = document.querySelector(selector);
+    this.backButton = this.element.querySelector(
+      `[data-country-selector="back"]`
+    );
+    this.saveButton = this.element.querySelector(
+      `[data-country-selector="save"]`
+    );
+
+    // Load sites and currencies
+    this.loadSites();
+    this.loadCurrencies();
+
+    // Add event listeners
+    this.addEventListeners();
+
+    // Set initial selected site and currency
+    const initialSite = getCookie("site") || "UK",
+      initialCurrency = getCookie("currency") || "GBP";
+
+    // Set selected site and currency
+    this.originallySelected = {
+      site: initialSite,
+      currency: initialCurrency,
+    };
+    this.setSelectedSite(initialSite);
+    this.setSelectedCurrency(initialCurrency);
+  },
+
+  /**
+   * Create sites array of objects
+   */
+  loadSites() {
+    const siteElements = this.element.querySelectorAll(
+      "[data-country-selector-site]"
+    );
+
+    const sites = Array.from(siteElements).map((site) => {
+      const id = site.getAttribute("data-country-selector-site");
+      const availableCurrencies = site
+        .getAttribute("data-country-selector-currencies")
+        .split(", ");
+
+      return {
+        id,
+        element: site,
+        availableCurrencies,
+      };
+    });
+
+    this.sites = sites;
+  },
+
+  /**
+   * Create currencies array of objects
+   */
+  loadCurrencies() {
+    const currencyElements = this.element.querySelectorAll(
+      "[data-country-selector-currency]"
+    );
+
+    const currencies = Array.from(currencyElements).map((currency) => {
+      const id = currency.getAttribute("data-country-selector-currency");
+
+      return {
+        id,
+        element: currency,
+      };
+    });
+
+    this.currencies = currencies;
+  },
+
+  /**
+   * Add event listeners
+   */
+  addEventListeners() {
+    // Add event listener to back button
+    this.backButton.addEventListener("click", () => {
+      this.setSelectedSite(this.originallySelected.site);
+      this.setSelectedCurrency(this.originallySelected.currency);
+    });
+
+    // Add event listener to save button
+    this.saveButton.addEventListener("click", () => {
+      // Set site & currency cookie to selected currency (14 days for testing)
+      setCookie("site", this.selected.site, 14);
+      setCookie("currency", this.selected.currency, 14);
+      window.location.reload();
+    });
+
+    // Add event listener to site buttons
+    this.sites.forEach((site) => {
+      site.element.addEventListener("click", () => {
+        this.setSelectedSite(site.id);
+
+        /**
+         * If current select currency is not available for the new site,
+         * set selected currency to the first available currency in the new site
+         */
+        if (!site.availableCurrencies.includes(this.selected.currency)) {
+          this.setSelectedCurrency(site.availableCurrencies[0]);
+        }
+      });
+    });
+
+    // Add event listener to currency buttons
+    this.currencies.forEach((currency) => {
+      currency.element.addEventListener("click", () => {
+        this.setSelectedCurrency(currency.id);
+      });
+    });
+
+    if (Header && Header.element) {
+      Header.element.addEventListener("countrySelectorBack", () => {
+        this.setSelectedSite(this.originallySelected.site);
+        this.setSelectedCurrency(this.originallySelected.currency);
+      });
+    }
+  },
+
+  /**
+   * Get selected site object
+   * @returns {Object} The selected site object
+   */
+  getSelectedSite() {
+    return this.sites.find((site) => site.id === this.selected.site);
+  },
+
+  /**
+   * Set selected site
+   */
+  setSelectedSite(site) {
+    this.selected.site = site;
+    const siteObject = this.getSelectedSite();
+
+    // Hide currencies that are not available for the selected site
+    this.currencies.forEach((currency) => {
+      if (siteObject.availableCurrencies.includes(currency.id)) {
+        currency.element.style.display = "";
+      } else {
+        currency.element.style.display = "none";
+      }
+    });
+
+    if (Header && Header.updateMegaMenuHeight) {
+      Header.updateMegaMenuHeight();
+    }
+
+    // Remove active class from all sites
+    this.sites.forEach((site) => {
+      site.element.classList.remove("active");
+    });
+
+    // Set new site to active
+    siteObject.element.classList.add("active");
+  },
+
+  /**
+   * Get selected currency object
+   * @returns {Object} The selected currency object
+   */
+  getSelectedCurrency() {
+    return this.currencies.find(
+      (currency) => currency.id === this.selected.currency
+    );
+  },
+
+  /**
+   * Set selected currency
+   */
+  setSelectedCurrency(currency) {
+    const siteObject = this.getSelectedSite();
+    if (!siteObject.availableCurrencies.includes(currency)) {
+      console.error("Currency not available for this site");
+      return;
+    }
+
+    this.selected.currency = currency;
+    const currencyObject = this.getSelectedCurrency();
+
+    // Remove active class from all currencies
+    this.currencies.forEach((currency) => {
+      currency.element.classList.remove("active");
+    });
+
+    // Set new currency to active
+    currencyObject.element.classList.add("active");
+  },
+};
+
+/* Util function */
+window.setCookie = function (name, value, days) {
+  const d = new Date();
+  d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = name + "=" + value + ";" + expires + ";path=/";
+};
+
+window.getCookie = function (name) {
+  var match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+  if (match) return match[2];
+};
+
 MagneticButtons.init(".magnetic-button");
+Header.init();
+InlineCurrencySelector.init(
+  `[data-menu="country-selector"] .inline-country-selector`
+);
