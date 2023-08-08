@@ -465,9 +465,9 @@ const Header = {
     this.megaMenu.openMenu = {};
 
     // If country selector has previous menu, close it
-    const { isOpen, previousMenu } = this.countrySelector;
-    if (isOpen) {
-      previousMenu.link.classList.remove("active");
+    const countrySelector = this.countrySelector;
+    if (countrySelector.isOpen) {
+      countrySelector.previousMenu.link.classList.remove("active");
       this.countrySelector = {
         isOpen: false,
         previousMenu: {},
