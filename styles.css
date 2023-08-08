@@ -178,7 +178,7 @@ header {
   position: absolute;
   inset: 100% 0 auto;
   height: max(1px, 0.05em);
-  background-color: var(--core-heat-white);
+  background-color: currentColor;
   transform-origin: right top;
   transform: scaleX(0);
   transition: transform 250ms ease;
@@ -516,7 +516,7 @@ header {
   position: absolute;
   inset: 100% 0 auto;
   height: max(1px, 0.05em);
-  background-color: var(--core-heat-white);
+  background-color: currentColor;
   transform-origin: right top;
   transform: scaleX(0);
   transition: transform 250ms ease;
@@ -535,10 +535,29 @@ header {
 }
 
 .global-header__mega-menu__country-selector {
+  position: relative;
   align-self: flex-end;
   font: var(--desktop-diatype-b2);
   text-transform: uppercase;
   color: rgba(var(--core-heat-white-rgb), 0.6);
+  cursor: pointer;
+}
+
+.global-header__mega-menu__country-selector:after {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 100% 0 auto;
+  height: max(1px, 0.05em);
+  background-color: currentColor;
+  transform-origin: right top;
+  transform: scaleX(0);
+  transition: transform 250ms ease;
+}
+
+.global-header__mega-menu__country-selector:hover:after {
+  transform-origin: left top;
+  transform: scaleX(1);
 }
 
 .global-header__mega-menu__overlay {

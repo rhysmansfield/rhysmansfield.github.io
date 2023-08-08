@@ -56,6 +56,12 @@ const MagneticButtons = {
 
 const Header = {
   element: null,
+  scroll: {
+    offscreenSpeed: 0.25 /* How fast the header moves offscreen */,
+    onscreenSpeed: 0.5 /* How fast the header moves onscreen */,
+    previousScroll: 0,
+    currentTransform: 0,
+  },
   megaMenu: {
     openMenu: {},
     menuLinks: [],
@@ -74,11 +80,10 @@ const Header = {
     cta: null,
     forms: [],
   },
-  scroll: {
-    offscreenSpeed: 0.25 /* How fast the header moves offscreen */,
-    onscreenSpeed: 0.5 /* How fast the header moves onscreen */,
-    previousScroll: 0,
-    currentTransform: 0,
+  countrySelector: {
+    isOpen: false,
+    previousMenu: null,
+    backButtons: [],
   },
 
   /**
@@ -90,9 +95,7 @@ const Header = {
     // Assign mega menu elements
     this.megaMenu = {
       ...this.megaMenu,
-      menuLinks: this.element.querySelectorAll(
-        ".global-header__menu [data-open-menu]"
-      ),
+      menuLinks: this.element.querySelectorAll("[data-open-menu]"),
       menuContentWrapper: this.element.querySelector(
         ".global-header__mega-menu"
       ),
@@ -120,6 +123,14 @@ const Header = {
       forms: this.element.querySelectorAll(".global-header__signup-form"),
     };
 
+    // Assign country selector back buttons
+    this.countrySelector = {
+      ...this.countrySelector,
+      backButtons: this.element.querySelectorAll(
+        "[data-country-selector-back]"
+      ),
+    };
+
     // Init height calculation functionality
     this.initHeight();
 
@@ -134,6 +145,9 @@ const Header = {
 
     // Initialize header signup
     this.initHeaderSignup();
+
+    // Initialize country selector
+    this.initCountrySelector();
   },
 
   /**
@@ -356,6 +370,20 @@ const Header = {
   },
 
   /**
+   * Initialize country selector
+   */
+  initCountrySelector() {
+    const { backButtons } = this.countrySelector;
+
+    // Add back button event listeners
+    backButtons.forEach((backButton) => {
+      backButton.addEventListener("click", () => {
+        this.handleCountrySelectBack(backButton);
+      });
+    });
+  },
+
+  /**
    * Reset header transform
    */
   resetHeaderTransform() {
@@ -400,6 +428,18 @@ const Header = {
     // Ensure header transform is reset
     this.resetHeaderTransform();
 
+    const isCountrySelector =
+      menuLink.getAttribute("data-open-menu") === "country-selector";
+
+    // If country selector, keep current menu link active
+    if (isCountrySelector) {
+      this.countrySelector = {
+        isOpen: true,
+        previousMenu: openMenu,
+      };
+      openMenu.link.classList.add("active");
+    }
+
     // Assign new open menu
     this.megaMenu.openMenu = {
       link: menuLink,
@@ -409,6 +449,7 @@ const Header = {
     // Open the menu
     menuLink.classList.add("active");
     menuContent.classList.add("active");
+
     this.megaMenu.menuContentWrapper.style.height = `${menuContent.offsetHeight}px`;
     this.element.classList.add("mega-menu-active");
   },
@@ -422,6 +463,16 @@ const Header = {
   closeMegaMenu(menuLink, menuContent, resetHeight = true) {
     // Reset open menu
     this.megaMenu.openMenu = {};
+
+    // If country selector has previous menu, close it
+    const { isOpen, previousMenu } = this.countrySelector;
+    if (isOpen) {
+      previousMenu.link.classList.remove("active");
+      this.countrySelector = {
+        isOpen: false,
+        previousMenu: {},
+      };
+    }
 
     // Ensure header transform is reset
     this.resetHeaderTransform();
@@ -527,6 +578,25 @@ const Header = {
       touchstartX = 0;
       touchendX = 0;
     });
+  },
+
+  /**
+   * Handle country select back
+   */
+  handleCountrySelectBack() {
+    const { previousMenu } = this.countrySelector;
+    const openMenu = this.getOpenMegaMenu();
+
+    // Close country selector
+    this.closeMegaMenu(openMenu.link, openMenu.content);
+
+    // Open previous menu
+    this.openMegaMenu(previousMenu.link, previousMenu.content);
+
+    this.countrySelector = {
+      isOpen: false,
+      previousMenu: {},
+    };
   },
 };
 
