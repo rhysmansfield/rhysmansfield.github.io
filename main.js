@@ -518,8 +518,6 @@ const Header = {
       // Calculate the distance swiped
       const distanceSwiped = touchendX - touchstartX;
 
-      console.log(distanceSwiped);
-
       // If direction is left to right and the distance swiped is greater than the threshold, close sub menu
       if (distanceSwiped > backSwipeThreshold) {
         const openSubMenu = this.getOpenMobileSubMenu();
