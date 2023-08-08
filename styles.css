@@ -540,7 +540,6 @@ header {
   font: var(--desktop-diatype-b2);
   text-transform: uppercase;
   color: rgba(var(--core-heat-white-rgb), 0.6);
-  cursor: pointer;
 }
 
 .global-header__mega-menu__country-selector:after {
