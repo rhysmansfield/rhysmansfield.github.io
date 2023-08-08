@@ -129,7 +129,7 @@ const Header = {
       ...this.countrySelector,
       wrapper: this.element.querySelector(`[data-menu="country-selector"]`),
       backButtons: this.element.querySelectorAll(
-        "[data-country-selector-back]"
+        `[data-country-selector="back"]`
       ),
     };
 

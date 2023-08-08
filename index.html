@@ -309,8 +309,89 @@
             data-menu="country-selector"
             class="global-header__mega-menu__item"
           >
-            Country selector
-            <button data-country-selector-back>Go back</button>
+            <div class="inline-country-selector">
+              <div class="inline-country-selector__region">
+                <div class="inline-country-selector__col-title">
+                  Region Select
+                </div>
+
+                <ul class="inline-country-selector__item-list">
+                  <li
+                    data-toggle-site="UK"
+                    class="inline-country-selector__item active"
+                  >
+                    <div class="inline-country-selector__item-flag">
+                      <img src="https://via.placeholder.com/1000" />
+                    </div>
+                    <div>
+                      <div class="inline-country-selector__item-title">
+                        <div>UK & Other Site</div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 16 17"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-width="2"
+                            d="M2 7.91 6.235 12 14 4.5"
+                          />
+                        </svg>
+                      </div>
+                      <div class="inline-country-selector__item-subtitle">
+                        GBP, USD, EUR, CAD, AUD, JPY
+                      </div>
+                    </div>
+                  </li>
+                  <li
+                    data-toggle-site="EU"
+                    class="inline-country-selector__item"
+                  >
+                    <div class="inline-country-selector__item-flag">
+                      <img src="https://via.placeholder.com/1000" />
+                    </div>
+                    <div>
+                      <div class="inline-country-selector__item-title">
+                        <div>EU Site</div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 16 17"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-width="2"
+                            d="M2 7.91 6.235 12 14 4.5"
+                          />
+                        </svg>
+                      </div>
+                      <div class="inline-country-selector__item-subtitle">
+                        EUR, SEK
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="inline-country-selector__currency">
+                <div class="inline-country-selector__col-title">
+                  Currency Select
+                </div>
+              </div>
+              <div class="inline-country-selector__button-wrapper">
+                <button
+                  data-country-selector="back"
+                  class="inline-country-selector__button-secondary"
+                >
+                  Go back
+                </button>
+                <button
+                  data-country-selector="save"
+                  class="inline-country-selector__button-primary"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
