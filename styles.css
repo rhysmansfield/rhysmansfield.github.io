@@ -801,6 +801,7 @@ header {
   width: 40px;
 }
 
+.inline-country-selector__item-flag svg,
 .inline-country-selector__item-flag img {
   border-radius: 100%;
 }
