@@ -83,6 +83,7 @@ const Header = {
   countrySelector: {
     isOpen: false,
     previousMenu: null,
+    wrapper: null,
     backButtons: [],
   },
 
@@ -126,6 +127,7 @@ const Header = {
     // Assign country selector back buttons
     this.countrySelector = {
       ...this.countrySelector,
+      wrapper: this.element.querySelector(`[data-menu="country-selector"]`),
       backButtons: this.element.querySelectorAll(
         "[data-country-selector-back]"
       ),
@@ -428,15 +430,12 @@ const Header = {
     // Ensure header transform is reset
     this.resetHeaderTransform();
 
-    const isCountrySelector =
-      menuLink.getAttribute("data-open-menu") === "country-selector";
-
     // If country selector, keep current menu link active
-    if (isCountrySelector) {
-      this.countrySelector = {
+    if (menuContent === this.countrySelector.wrapper) {
+      this.updateCountrySelector({
         isOpen: true,
         previousMenu: openMenu,
-      };
+      });
       openMenu.link.classList.add("active");
     }
 
@@ -468,10 +467,10 @@ const Header = {
     const countrySelector = this.countrySelector;
     if (countrySelector.isOpen) {
       countrySelector.previousMenu.link.classList.remove("active");
-      this.countrySelector = {
+      this.updateCountrySelector({
         isOpen: false,
         previousMenu: {},
-      };
+      });
     }
 
     // Ensure header transform is reset
@@ -593,9 +592,20 @@ const Header = {
     // Open previous menu
     this.openMegaMenu(previousMenu.link, previousMenu.content);
 
-    this.countrySelector = {
+    this.updateCountrySelector({
       isOpen: false,
       previousMenu: {},
+    });
+  },
+
+  /**
+   * Update country selector properties
+   * @param {Object} properties
+   */
+  updateCountrySelector(properties) {
+    this.countrySelector = {
+      ...this.countrySelector,
+      ...properties,
     };
   },
 };
