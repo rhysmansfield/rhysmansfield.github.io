@@ -844,6 +844,8 @@ const MobileCountrySelector = {
   overlay: null,
   wrapper: null,
   closeButton: null,
+  backButton: null,
+  saveButton: null,
   screens: {},
   isOpen: false,
   selected: {},
@@ -860,6 +862,12 @@ const MobileCountrySelector = {
     );
     this.closeButton = this.element.querySelector(
       ".mobile-country-selector__close"
+    );
+    this.backButton = this.element.querySelector(
+      `[data-country-selector="back"]`
+    );
+    this.saveButton = this.element.querySelector(
+      `[data-country-selector="save"]`
     );
 
     this.buttons = document.querySelectorAll("[data-mobile-country-selector]");
@@ -931,6 +939,16 @@ const MobileCountrySelector = {
     // Close mobile country selector on close button click
     this.closeButton.addEventListener("click", () => {
       this.close();
+    });
+
+    this.backButton.addEventListener("click", () => {
+      this.showScreen("sites");
+    });
+
+    this.saveButton.addEventListener("click", () => {
+      setCookie("site", this.selected.site, 14);
+      setCookie("currency", this.selected.currency, 14);
+      window.location.reload();
     });
 
     this.sites.forEach((site) => {
