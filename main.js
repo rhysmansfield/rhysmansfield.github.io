@@ -123,7 +123,6 @@ const Header = {
     this.countrySelector = InlineCountrySelector.init(
       `[data-menu="country-selector"] .inline-country-selector`
     );
-    console.log(this.countrySelector);
     this.countrySelector.wrapper = this.element.querySelector(
       `[data-menu="country-selector"]`
     );
@@ -846,6 +845,7 @@ const MobileCountrySelector = {
   closeButton: null,
   backButton: null,
   saveButton: null,
+  dropdown: {},
   screens: {},
   isOpen: false,
   selected: {},
@@ -869,6 +869,10 @@ const MobileCountrySelector = {
     this.saveButton = this.element.querySelector(
       `[data-country-selector="save"]`
     );
+    this.dropdown = {
+      isOpen: false,
+      wrapper: this.element.querySelector(".country-selector__dropdown"),
+    };
 
     this.buttons = document.querySelectorAll("[data-mobile-country-selector]");
 
@@ -891,7 +895,7 @@ const MobileCountrySelector = {
     this.addEventListeners();
 
     this.setSelectedSite(CountrySelector.originallySelected.site);
-    //this.setSelectedCurrency(CountrySelector.originallySelected.currency);
+    this.setSelectedCurrency(CountrySelector.originallySelected.currency);
   },
 
   /**
@@ -920,7 +924,20 @@ const MobileCountrySelector = {
    * Create currencies array of objects
    */
   loadCurrencies() {
-    //this.currencies = currencies;
+    const currencyElements = this.element.querySelectorAll(
+      "[data-country-selector-currency]"
+    );
+
+    const currencies = Array.from(currencyElements).map((currency) => {
+      const id = currency.getAttribute("data-country-selector-currency");
+
+      return {
+        id,
+        element: currency,
+      };
+    });
+
+    this.currencies = currencies;
   },
 
   addEventListeners() {
@@ -943,6 +960,7 @@ const MobileCountrySelector = {
 
     this.backButton.addEventListener("click", () => {
       this.showScreen("sites");
+      this.setSelectedCurrency(CountrySelector.originallySelected.currency);
     });
 
     this.saveButton.addEventListener("click", () => {
@@ -954,6 +972,32 @@ const MobileCountrySelector = {
     this.sites.forEach((site) => {
       site.element.addEventListener("click", () => {
         this.setSelectedSite(site.id);
+
+        // Show currencies screen
+        this.showScreen("currencies");
+      });
+    });
+
+    this.dropdown.wrapper.addEventListener("click", (event) => {
+      if (this.dropdown.isOpen) return;
+      if (event.target !== this.dropdown.wrapper) return;
+
+      this.dropdown.isOpen = true;
+      this.dropdown.wrapper.classList.add("active");
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!this.dropdown.isOpen) return;
+      if (event.target.closest(".country-selector__dropdown")) return;
+
+      this.dropdown.isOpen = false;
+      this.dropdown.wrapper.classList.remove("active");
+    });
+
+    this.currencies.forEach((currency) => {
+      currency.element.addEventListener("click", () => {
+        this.setSelectedCurrency(currency.id);
+        this.dropdown.wrapper.scrollTop = 0;
       });
     });
   },
@@ -983,15 +1027,14 @@ const MobileCountrySelector = {
     }, transitionSpeed);
   },
 
-  updateHeight() {
-    this.wrapper.style.height = `${this.wrapper.firstElementChild.offsetHeight}px`;
-  },
-
   /**
    * Show screen
    * @param {String} screen The screen to show
    */
   showScreen(screen) {
+    // Set wrapper height to current height
+    this.wrapper.style.height = `${this.wrapper.firstElementChild.offsetHeight}px`;
+
     Object.values(this.screens).forEach((screen) => {
       screen.title.classList.remove("active");
       screen.content.classList.remove("active");
@@ -1000,7 +1043,15 @@ const MobileCountrySelector = {
     this.screens[screen].title.classList.add("active");
     this.screens[screen].content.classList.add("active");
 
-    this.updateHeight();
+    // Set wrapper height to new height
+    this.wrapper.style.height = `${this.wrapper.firstElementChild.offsetHeight}px`;
+
+    // Reset wrapper height after animation
+    setTimeout(() => {
+      this.wrapper.style.height = "";
+    }, 250);
+
+    //this.updateHeight();
   },
 
   /**
@@ -1047,9 +1098,36 @@ const MobileCountrySelector = {
     this.screens.currencies.content.querySelector(
       "[data-selected-site]"
     ).innerHTML = htmlClone.outerHTML;
+  },
 
-    // Show currencies screen
-    this.showScreen("currencies");
+  /**
+   * Get selected currency object
+   */
+  getSelectedCurrency() {
+    return this.currencies.find(
+      (currency) => currency.id === this.selected.currency
+    );
+  },
+
+  /**
+   * Set selected currency
+   * @param {String} currency The currency to set
+   */
+  setSelectedCurrency(currency) {
+    this.selected.currency = currency;
+    const currencyObject = this.getSelectedCurrency();
+
+    // Remove active class from all currencies
+    this.currencies.forEach((currency) => {
+      currency.element.classList.remove("active");
+    });
+
+    // Set new currency to active
+    currencyObject.element.classList.add("active");
+
+    // Close dropdown
+    this.dropdown.isOpen = false;
+    this.dropdown.wrapper.classList.remove("active");
   },
 };
 
