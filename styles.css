@@ -897,13 +897,17 @@ header {
   transition: transform 250ms ease;
 }
 
-.country-selector__dropdown.active {
+.country-selector__dropdown.no-children > svg {
+  display: none;
+}
+
+.country-selector__dropdown:not(.no-children).active {
   max-height: calc(58px * 3 + 4px * 2);
   overflow: auto;
   background: rgba(var(--core-heat-white-rgb), 0.08);
 }
 
-.country-selector__dropdown.active > svg {
+.country-selector__dropdown:not(.no-children).active > svg {
   transform: rotate(180deg);
 }
 

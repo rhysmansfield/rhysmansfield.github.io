@@ -1078,6 +1078,12 @@ const MobileCountrySelector = {
       }
     });
 
+    if (siteObject.availableCurrencies.length <= 1) {
+      this.dropdown.wrapper.classList.add("no-children");
+    } else {
+      this.dropdown.wrapper.classList.remove("no-children");
+    }
+
     if (Header && Header.updateMegaMenuHeight) {
       Header.updateMegaMenuHeight();
     }
