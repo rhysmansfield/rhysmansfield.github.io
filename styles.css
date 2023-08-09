@@ -740,6 +740,10 @@ header {
   color: rgba(var(--core-heat-white-rgb), 0.6);
 }
 
+.global-header__mobile-menu__footer-links button {
+  text-transform: uppercase;
+}
+
 /* Country selector */
 .inline-country-selector {
   display: grid;

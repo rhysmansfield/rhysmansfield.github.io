@@ -829,7 +829,36 @@ const InlineCountrySelector = {
   },
 };
 
-const MobileCountrySelector = {};
+const MobileCountrySelector = {
+  element: null,
+  buttons: [],
+  overlay: null,
+  isOpen: false,
+
+  init() {
+    this.element = document.querySelector(".mobile-country-selector");
+    this.overlay = this.element.querySelector(
+      ".mobile-country-selector__overlay"
+    );
+    this.buttons = document.querySelectorAll("[data-mobile-country-selector]");
+
+    this.addEventListeners();
+  },
+
+  addEventListeners() {
+    this.buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        this.element.classList.add("active");
+        this.isOpen = true;
+      });
+    });
+
+    this.overlay.addEventListener("click", () => {
+      this.element.classList.remove("active");
+      this.isOpen = false;
+    });
+  },
+};
 
 /* Util function */
 window.setCookie = function (name, value, days) {
@@ -846,3 +875,4 @@ window.getCookie = function (name) {
 
 MagneticButtons.init(".magnetic-button");
 Header.init();
+MobileCountrySelector.init();
