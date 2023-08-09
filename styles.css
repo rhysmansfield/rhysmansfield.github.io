@@ -905,9 +905,33 @@ header {
 
 .country-selector__dropdown:not(.no-children).active {
   max-height: calc(58px * 3 + 4px * 2);
-  overflow: auto;
   background: rgba(var(--core-heat-white-rgb), 0.08);
+  animation: 250ms delay-overflow forwards;
 }
+
+@keyframes delay-overflow {
+  0% {
+    overflow: hidden;
+  }
+  100% {
+    overflow: auto;
+  }
+}
+
+/*
+.country-selector__dropdown::-webkit-scrollbar {
+  width: 2px;
+}
+
+.country-selector__dropdown::-webkit-scrollbar-track-piece {
+  border-radius: 8px;
+  background-color: rgba(var(--core-heat-white-rgb), 0.32);
+}
+
+.country-selector__dropdown::-webkit-scrollbar-thumb:vertical {
+  border-radius: 8px;
+  background-color: var(--core-heat-white);
+}*/
 
 .country-selector__dropdown:not(.no-children).active > svg {
   transform: rotate(180deg);

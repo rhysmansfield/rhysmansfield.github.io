@@ -990,16 +990,14 @@ const MobileCountrySelector = {
       if (this.dropdown.isOpen) return;
       if (event.target !== this.dropdown.wrapper) return;
 
-      this.dropdown.isOpen = true;
-      this.dropdown.wrapper.classList.add("active");
+      this.openDropdown();
     });
 
     document.addEventListener("click", (event) => {
       if (!this.dropdown.isOpen) return;
       if (event.target.closest(".country-selector__dropdown")) return;
 
-      this.dropdown.isOpen = false;
-      this.dropdown.wrapper.classList.remove("active");
+      this.closeDropdown();
     });
 
     this.currencies.forEach((currency) => {
@@ -1033,6 +1031,22 @@ const MobileCountrySelector = {
     setTimeout(() => {
       this.setSelectedSite(CountrySelector.originallySelected.site);
     }, transitionSpeed);
+  },
+
+  /**
+   * Open currency dropdown
+   */
+  openDropdown() {
+    this.dropdown.isOpen = true;
+    this.dropdown.wrapper.classList.add("active");
+  },
+
+  /**
+   * Close currency dropdown
+   */
+  closeDropdown() {
+    this.dropdown.isOpen = false;
+    this.dropdown.wrapper.classList.remove("active");
   },
 
   /**
@@ -1140,8 +1154,7 @@ const MobileCountrySelector = {
     currencyObject.element.classList.add("active");
 
     // Close dropdown
-    this.dropdown.isOpen = false;
-    this.dropdown.wrapper.classList.remove("active");
+    this.closeDropdown();
   },
 };
 
