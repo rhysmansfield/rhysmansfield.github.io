@@ -177,7 +177,7 @@ header {
   display: block;
   position: absolute;
   inset: 100% 0 auto;
-  height: max(1px, 0.05em);
+  height: max(2px, 0.05em);
   background-color: currentColor;
   transform-origin: right top;
   transform: scaleX(0);
@@ -515,7 +515,7 @@ header {
   display: block;
   position: absolute;
   inset: 100% 0 auto;
-  height: max(1px, 0.05em);
+  height: max(2px, 0.05em);
   background-color: currentColor;
   transform-origin: right top;
   transform: scaleX(0);
@@ -547,7 +547,7 @@ header {
   display: block;
   position: absolute;
   inset: 100% 0 auto;
-  height: max(1px, 0.05em);
+  height: max(2px, 0.05em);
   background-color: currentColor;
   transform-origin: right top;
   transform: scaleX(0);
