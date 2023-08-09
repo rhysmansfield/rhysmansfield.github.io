@@ -798,17 +798,25 @@ header {
   transition: background 250ms ease;
 }
 
-.country-selector__item:not(.active) {
+[data-country-selector-site].country-selector__item:not(.active),
+[data-country-selector-currency].country-selector__item:not(.active) {
   cursor: pointer;
 }
 
-.country-selector__item:not(.active):hover {
+[data-country-selector-site].country-selector__item:not(.active):hover,
+[data-country-selector-currency].country-selector__item:not(.active):hover {
   background: rgba(var(--core-heat-white-rgb), 0.16);
 }
 
 .country-selector__item-flag {
   display: block;
   width: 40px;
+}
+
+@media (max-width: 1012px) {
+  .country-selector__item-flag {
+    width: 34px;
+  }
 }
 
 .country-selector__item-flag svg,

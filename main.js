@@ -955,7 +955,14 @@ const MobileCountrySelector = {
   close() {
     this.element.classList.remove("active");
     this.isOpen = false;
-    this.setSelectedSite(CountrySelector.originallySelected.site);
+
+    const transitionSpeed =
+      parseFloat(window.getComputedStyle(this.element).transitionDuration) *
+      1000;
+    // Reset selected site after element has closed
+    setTimeout(() => {
+      this.setSelectedSite(CountrySelector.originallySelected.site);
+    }, transitionSpeed);
   },
 
   updateHeight() {
