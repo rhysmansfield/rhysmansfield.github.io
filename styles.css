@@ -890,7 +890,7 @@ header {
 
 .country-selector__dropdown > svg {
   position: absolute;
-  top: 12px;
+  top: 16px;
   right: 16px;
   width: 24px;
   pointer-events: none;
