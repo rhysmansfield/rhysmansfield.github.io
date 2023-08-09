@@ -973,6 +973,14 @@ const MobileCountrySelector = {
       site.element.addEventListener("click", () => {
         this.setSelectedSite(site.id);
 
+        /**
+         * If current select currency is not available for the new site,
+         * set selected currency to the first available currency in the new site
+         */
+        if (!site.availableCurrencies.includes(this.selected.currency)) {
+          this.setSelectedCurrency(site.availableCurrencies[0]);
+        }
+
         // Show currencies screen
         this.showScreen("currencies");
       });

@@ -841,9 +841,11 @@ header {
 }
 
 .country-selector__item-title svg {
-  display: none;
   width: 16px;
   height: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 250ms ease, visibility 250ms ease;
 }
 
 .country-selector__item-subtitle {
@@ -864,8 +866,8 @@ header {
 }
 
 .country-selector__item.active .country-selector__item-title svg {
-  display: block;
-  color: #30c04f;
+  opacity: 1;
+  visibility: visible;
 }
 
 .country-selector__item.active .country-selector__item-title {
@@ -919,12 +921,38 @@ header {
   pointer-events: auto;
 }
 
+.country-selector__dropdown.active .country-selector__dropdown-option.active {
+  background: rgba(48, 192, 79, 0.16);
+  border-radius: 0 0 8px 8px;
+}
+
+.country-selector__dropdown.active
+  .country-selector__dropdown-option.active
+  .country-selector__item-title {
+  color: #30c04f;
+}
+
+.country-selector__dropdown.active
+  .country-selector__dropdown-option.active
+  .country-selector__item-title
+  svg {
+  opacity: 1;
+  visibility: visible;
+}
+
+.country-selector__dropdown.active
+  .country-selector__dropdown-option.active
+  .country-selector__item-subtitle {
+  color: rgba(48, 192, 79, 0.6);
+}
+
 .country-selector__dropdown-option {
   display: flex;
   order: 1;
   gap: 16px;
   padding: 12px 16px;
-  transition: order 0ms ease 125ms;
+  border-radius: 0;
+  transition: background 250ms ease, border-radius 250ms ease;
 }
 
 .country-selector__dropdown-option.active {
