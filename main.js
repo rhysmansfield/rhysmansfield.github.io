@@ -80,12 +80,7 @@ const Header = {
     cta: null,
     forms: [],
   },
-  countrySelector: {
-    isOpen: false,
-    previousMenu: null,
-    wrapper: null,
-    backButtons: [],
-  },
+  countrySelector: null,
 
   /**
    * Initialize the header
@@ -125,13 +120,15 @@ const Header = {
     };
 
     // Assign country selector back buttons
-    this.countrySelector = {
-      ...this.countrySelector,
-      wrapper: this.element.querySelector(`[data-menu="country-selector"]`),
-      backButtons: this.element.querySelectorAll(
-        `[data-country-selector="back"]`
-      ),
-    };
+    this.countrySelector = InlineCountrySelector.init(
+      `[data-menu="country-selector"] .inline-country-selector`
+    );
+    console.log(this.countrySelector);
+    this.countrySelector.wrapper = this.element.querySelector(
+      `[data-menu="country-selector"]`
+    );
+    this.countrySelector.isOpen = false;
+    this.countrySelector.previousMenu = {};
 
     // Init height calculation functionality
     this.initHeight();
@@ -375,13 +372,8 @@ const Header = {
    * Initialize country selector
    */
   initCountrySelector() {
-    const { backButtons } = this.countrySelector;
-
-    // Add back button event listeners
-    backButtons.forEach((backButton) => {
-      backButton.addEventListener("click", () => {
-        this.handleCountrySelectBack(backButton);
-      });
+    this.countrySelector.setBackButtonCallback((button) => {
+      this.handleCountrySelectBack(button);
     });
   },
 
@@ -446,10 +438,8 @@ const Header = {
 
     // If country selector, keep current menu link active
     if (menuContent === this.countrySelector.wrapper) {
-      this.updateCountrySelector({
-        isOpen: true,
-        previousMenu: openMenu,
-      });
+      this.countrySelector.isOpen = true;
+      this.countrySelector.previousMenu = openMenu;
       openMenu.link.classList.add("active");
     }
 
@@ -481,10 +471,8 @@ const Header = {
     const countrySelector = this.countrySelector;
     if (countrySelector.isOpen) {
       countrySelector.previousMenu.link.classList.remove("active");
-      this.updateCountrySelector({
-        isOpen: false,
-        previousMenu: {},
-      });
+      this.countrySelector.isOpen = false;
+      this.countrySelector.previousMenu = {};
     }
 
     // Ensure header transform is reset
@@ -610,27 +598,15 @@ const Header = {
     // Open previous menu
     this.openMegaMenu(previousMenu.link, previousMenu.content);
 
-    this.updateCountrySelector({
-      isOpen: false,
-      previousMenu: {},
-    });
-  },
-
-  /**
-   * Update country selector properties
-   * @param {Object} properties
-   */
-  updateCountrySelector(properties) {
-    this.countrySelector = {
-      ...this.countrySelector,
-      ...properties,
-    };
+    this.countrySelector.isOpen = false;
+    this.countrySelector.previousMenu = {};
   },
 };
 
-const InlineCurrencySelector = {
+const InlineCountrySelector = {
   element: null,
   backButton: null,
+  backButtonCallback: null,
   saveButton: null,
   originallySelected: {},
   selected: {},
@@ -668,6 +644,8 @@ const InlineCurrencySelector = {
     };
     this.setSelectedSite(initialSite);
     this.setSelectedCurrency(initialCurrency);
+
+    return this;
   },
 
   /**
@@ -725,6 +703,13 @@ const InlineCurrencySelector = {
 
     // Add event listener to back button
     this.backButton.addEventListener("click", revertSelections.bind(this));
+
+    // Ensure back button callback is called when button is clicked
+    this.backButton.addEventListener("click", () => {
+      if (this.backButtonCallback) {
+        this.backButtonCallback();
+      }
+    });
 
     // Add event listener to mega menu close
     document.addEventListener("megaMenuClosed", revertSelections.bind(this));
@@ -835,7 +820,16 @@ const InlineCurrencySelector = {
     // Set new currency to active
     currencyObject.element.classList.add("active");
   },
+
+  /**
+   * Set back button callback function
+   */
+  setBackButtonCallback(callback) {
+    this.backButtonCallback = callback;
+  },
 };
+
+const MobileCountrySelector = {};
 
 /* Util function */
 window.setCookie = function (name, value, days) {
@@ -852,6 +846,3 @@ window.getCookie = function (name) {
 
 MagneticButtons.init(".magnetic-button");
 Header.init();
-InlineCurrencySelector.init(
-  `[data-menu="country-selector"] .inline-country-selector`
-);
