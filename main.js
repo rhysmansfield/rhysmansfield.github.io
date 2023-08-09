@@ -603,12 +603,39 @@ const Header = {
   },
 };
 
+/**
+ * CountrySelector holds the state across inline & mobile country selectors
+ */
+const CountrySelector = {
+  sites: {
+    UK: {
+      availableCurrencies: ["GBP", "USD", "EUR", "CAD", "AUD", "JPY"],
+    },
+    EU: {
+      availableCurrencies: ["EUR", "SEK"],
+    },
+    US: {
+      availableCurrencies: ["USD"],
+    },
+  },
+  originallySelected: {},
+
+  init() {
+    const initialSite = getCookie("site") || "UK",
+      initialCurrency = getCookie("currency") || "GBP";
+
+    this.originallySelected = {
+      site: initialSite,
+      currency: initialCurrency,
+    };
+  },
+};
+
 const InlineCountrySelector = {
   element: null,
   backButton: null,
   backButtonCallback: null,
   saveButton: null,
-  originallySelected: {},
   selected: {},
   sites: [],
   currencies: [],
@@ -633,17 +660,8 @@ const InlineCountrySelector = {
     // Add event listeners
     this.addEventListeners();
 
-    // Set initial selected site and currency
-    const initialSite = getCookie("site") || "UK",
-      initialCurrency = getCookie("currency") || "GBP";
-
-    // Set selected site and currency
-    this.originallySelected = {
-      site: initialSite,
-      currency: initialCurrency,
-    };
-    this.setSelectedSite(initialSite);
-    this.setSelectedCurrency(initialCurrency);
+    this.setSelectedSite(CountrySelector.originallySelected.site);
+    this.setSelectedCurrency(CountrySelector.originallySelected.currency);
 
     return this;
   },
@@ -658,9 +676,7 @@ const InlineCountrySelector = {
 
     const sites = Array.from(siteElements).map((site) => {
       const id = site.getAttribute("data-country-selector-site");
-      const availableCurrencies = site
-        .getAttribute("data-country-selector-currencies")
-        .split(", ");
+      const availableCurrencies = CountrySelector.sites[id].availableCurrencies;
 
       return {
         id,
@@ -697,8 +713,8 @@ const InlineCountrySelector = {
    */
   addEventListeners() {
     function revertSelections() {
-      this.setSelectedSite(this.originallySelected.site);
-      this.setSelectedCurrency(this.originallySelected.currency);
+      this.setSelectedSite(CountrySelector.originallySelected.site);
+      this.setSelectedCurrency(CountrySelector.originallySelected.currency);
     }
 
     // Add event listener to back button
@@ -743,13 +759,6 @@ const InlineCountrySelector = {
         this.setSelectedCurrency(currency.id);
       });
     });
-
-    if (Header && Header.element) {
-      Header.element.addEventListener("countrySelectorBack", () => {
-        this.setSelectedSite(this.originallySelected.site);
-        this.setSelectedCurrency(this.originallySelected.currency);
-      });
-    }
   },
 
   /**
@@ -833,30 +842,189 @@ const MobileCountrySelector = {
   element: null,
   buttons: [],
   overlay: null,
+  wrapper: null,
+  closeButton: null,
+  screens: {},
   isOpen: false,
+  selected: {},
+  sites: [],
+  currencies: [],
 
   init() {
     this.element = document.querySelector(".mobile-country-selector");
     this.overlay = this.element.querySelector(
       ".mobile-country-selector__overlay"
     );
+    this.wrapper = this.element.querySelector(
+      ".mobile-country-selector__wrapper"
+    );
+    this.closeButton = this.element.querySelector(
+      ".mobile-country-selector__close"
+    );
+
     this.buttons = document.querySelectorAll("[data-mobile-country-selector]");
 
+    this.screens = {
+      sites: {
+        title: this.element.querySelector(`[data-title="sites"]`),
+        content: this.element.querySelector(`[data-content="sites"]`),
+      },
+      currencies: {
+        title: this.element.querySelector(`[data-title="currencies"]`),
+        content: this.element.querySelector(`[data-content="currencies"]`),
+      },
+    };
+
+    // Load sites and currencies
+    this.loadSites();
+    this.loadCurrencies();
+
+    // Add event listeners
     this.addEventListeners();
+
+    this.setSelectedSite(CountrySelector.originallySelected.site);
+    //this.setSelectedCurrency(CountrySelector.originallySelected.currency);
+  },
+
+  /**
+   * Create sites array of objects
+   */
+  loadSites() {
+    const siteElements = this.element.querySelectorAll(
+      "[data-country-selector-site]"
+    );
+
+    const sites = Array.from(siteElements).map((site) => {
+      const id = site.getAttribute("data-country-selector-site");
+      const availableCurrencies = CountrySelector.sites[id].availableCurrencies;
+
+      return {
+        id,
+        element: site,
+        availableCurrencies,
+      };
+    });
+
+    this.sites = sites;
+  },
+
+  /**
+   * Create currencies array of objects
+   */
+  loadCurrencies() {
+    //this.currencies = currencies;
   },
 
   addEventListeners() {
+    // Open mobile country selector buttons
     this.buttons.forEach((button) => {
       button.addEventListener("click", () => {
-        this.element.classList.add("active");
-        this.isOpen = true;
+        this.open();
       });
     });
 
+    // Close mobile country selector on overlay click
     this.overlay.addEventListener("click", () => {
-      this.element.classList.remove("active");
-      this.isOpen = false;
+      this.close();
     });
+
+    // Close mobile country selector on close button click
+    this.closeButton.addEventListener("click", () => {
+      this.close();
+    });
+
+    this.sites.forEach((site) => {
+      site.element.addEventListener("click", () => {
+        this.setSelectedSite(site.id);
+      });
+    });
+  },
+
+  /**
+   * Open mobile country selector
+   */
+  open() {
+    this.element.classList.add("active");
+    this.isOpen = true;
+    this.showScreen("sites");
+  },
+
+  /**
+   * Close mobile country selector
+   */
+  close() {
+    this.element.classList.remove("active");
+    this.isOpen = false;
+    this.setSelectedSite(CountrySelector.originallySelected.site);
+  },
+
+  updateHeight() {
+    this.wrapper.style.height = `${this.wrapper.firstElementChild.offsetHeight}px`;
+  },
+
+  /**
+   * Show screen
+   * @param {String} screen The screen to show
+   */
+  showScreen(screen) {
+    Object.values(this.screens).forEach((screen) => {
+      screen.title.classList.remove("active");
+      screen.content.classList.remove("active");
+    });
+
+    this.screens[screen].title.classList.add("active");
+    this.screens[screen].content.classList.add("active");
+
+    this.updateHeight();
+  },
+
+  /**
+   * Get selected site object
+   * @returns {Object} The selected site object
+   */
+  getSelectedSite() {
+    return this.sites.find((site) => site.id === this.selected.site);
+  },
+
+  /**
+   * Set selected site
+   */
+  setSelectedSite(site) {
+    this.selected.site = site;
+    const siteObject = this.getSelectedSite();
+
+    // Hide currencies that are not available for the selected site
+    this.currencies.forEach((currency) => {
+      if (siteObject.availableCurrencies.includes(currency.id)) {
+        currency.element.style.display = "";
+      } else {
+        currency.element.style.display = "none";
+      }
+    });
+
+    if (Header && Header.updateMegaMenuHeight) {
+      Header.updateMegaMenuHeight();
+    }
+
+    // Remove active class from all sites
+    this.sites.forEach((site) => {
+      site.element.classList.remove("active");
+    });
+
+    // Set new site to active
+    siteObject.element.classList.add("active");
+
+    // Set selected site in currencies screen
+    var htmlClone = siteObject.element.cloneNode(true);
+    htmlClone.classList.remove("active");
+    htmlClone.removeAttribute("data-country-selector-site");
+
+    this.screens.currencies.content.querySelector(
+      "[data-selected-site]"
+    ).innerHTML = htmlClone.outerHTML;
+
+    // Show currencies screen
+    this.showScreen("currencies");
   },
 };
 
@@ -874,5 +1042,6 @@ window.getCookie = function (name) {
 };
 
 MagneticButtons.init(".magnetic-button");
-Header.init();
+CountrySelector.init();
 MobileCountrySelector.init();
+Header.init();
