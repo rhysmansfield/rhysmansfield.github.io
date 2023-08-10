@@ -917,6 +917,8 @@ const MobileCountrySelector = {
 
     this.setSelectedSite(CountrySelector.originallySelected.site);
     this.setSelectedCurrency(CountrySelector.originallySelected.currency);
+
+    this.showScreen("sites");
   },
 
   /**
@@ -1035,7 +1037,6 @@ const MobileCountrySelector = {
   open() {
     this.element.classList.add("active");
     this.isOpen = true;
-    this.showScreen("sites");
   },
 
   /**
@@ -1044,6 +1045,7 @@ const MobileCountrySelector = {
   close() {
     this.element.classList.remove("active");
     this.isOpen = false;
+    this.showScreen("sites");
 
     const transitionSpeed =
       parseFloat(window.getComputedStyle(this.element).transitionDuration) *
@@ -1096,8 +1098,6 @@ const MobileCountrySelector = {
     setTimeout(() => {
       this.wrapper.style.height = "";
     }, 250);
-
-    //this.updateHeight();
   },
 
   /**
