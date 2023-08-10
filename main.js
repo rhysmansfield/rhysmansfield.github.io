@@ -1058,6 +1058,9 @@ const MobileCountrySelector = {
    * Open currency dropdown
    */
   openDropdown() {
+    const siteObject = this.getSelectedSite();
+    if (siteObject.availableCurrencies.length <= 1) return;
+
     this.dropdown.isOpen = true;
     this.dropdown.wrapper.classList.add("active");
   },
@@ -1112,6 +1115,12 @@ const MobileCountrySelector = {
     this.selected.site = site;
     const siteObject = this.getSelectedSite();
 
+    if (siteObject.availableCurrencies.length <= 1) {
+      this.dropdown.wrapper.classList.add("no-children");
+    } else {
+      this.dropdown.wrapper.classList.remove("no-children");
+    }
+
     // Hide currencies that are not available for the selected site
     this.currencies.forEach((currency) => {
       if (siteObject.availableCurrencies.includes(currency.id)) {
@@ -1120,12 +1129,6 @@ const MobileCountrySelector = {
         currency.element.style.display = "none";
       }
     });
-
-    if (siteObject.availableCurrencies.length <= 1) {
-      this.dropdown.wrapper.classList.add("no-children");
-    } else {
-      this.dropdown.wrapper.classList.remove("no-children");
-    }
 
     if (Header && Header.updateMegaMenuHeight) {
       Header.updateMegaMenuHeight();
