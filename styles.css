@@ -91,7 +91,7 @@ header {
     --global-header-height: 57px;
     height: var(--global-header-height);
     overflow: hidden;
-    transition: height 250ms ease;
+    transition: background 250ms ease, height 250ms ease;
   }
 
   /* Ensure megamenu doesnt effect mobile menu colour */

@@ -511,6 +511,27 @@ const Header = {
     this.mobileMenu.menuAction.classList.toggle("active");
     this.mobileMenu.menu.classList.toggle("active");
     this.element.classList.toggle("mobile-menu-active");
+
+    // Lock body scroll
+    this.handleScrollLock();
+  },
+
+  /**
+   * Handle scroll lock
+   */
+  handleScrollLock() {
+    if (this.mobileMenu.isOpen) {
+      const top = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${top}px`;
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
+
+    this.resetHeaderTransform();
   },
 
   /**
