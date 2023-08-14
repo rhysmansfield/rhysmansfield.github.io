@@ -56,11 +56,19 @@
 }
 
 body {
+  --global-header-height: 61px;
   background: var(--core-heat-black);
+}
+
+@media (max-width: 1012px) {
+  body {
+    --global-header-height: 57px;
+  }
 }
 
 header {
   position: fixed;
+  z-index: 100;
   top: 0;
   left: 0;
   width: 100%;
@@ -74,7 +82,6 @@ header {
 }
 
 .global-header {
-  --global-header-height: 60px;
   background: rgba(var(--core-heat-black-rgb), 0.24);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
@@ -88,7 +95,6 @@ header {
 
 @media (max-width: 1012px) {
   .global-header {
-    --global-header-height: 57px;
     height: var(--global-header-height);
     overflow: hidden;
     transition: background 250ms ease, height 250ms ease;
@@ -1015,6 +1021,7 @@ header {
 
 .mobile-country-selector {
   position: fixed;
+  z-index: 110;
   top: 0;
   left: 0;
   width: 100%;
