@@ -446,12 +446,13 @@ body {
   min-width: 192px;
   padding: 10px 16px;
   border-radius: 24px;
-  transition: gap 250ms ease;
+  transition: scale 250ms ease, box-shadow 250ms ease, gap 250ms ease;
 }
 
 .collection__card__button-primary:hover,
 .collection__card__button-secondary:hover {
   gap: 6px;
+  scale: 0.95;
 }
 
 @media (max-width: 1012px) {
@@ -461,16 +462,6 @@ body {
     min-width: auto;
     width: 50%;
   }
-}
-
-.collection__card__button-primary > *,
-.collection__card__button-secondary > * {
-  transition: scale 250ms ease;
-}
-
-.collection__card__button-primary:hover > *,
-.collection__card__button-secondary:hover > * {
-  scale: 0.95;
 }
 
 .collection__card__button-secondary {
@@ -486,4 +477,8 @@ body {
 
 .collection__card__button-primary svg {
   width: 16px;
+}
+
+.collection__card__button-primary:hover {
+  box-shadow: none;
 }
