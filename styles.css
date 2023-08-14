@@ -446,7 +446,7 @@ body {
   min-width: 192px;
   padding: 10px 16px;
   border-radius: 24px;
-  transition: scale 250ms ease, box-shadow 250ms ease;
+  transition: scale 250ms ease, border 250ms ease, box-shadow 250ms ease;
 }
 
 .collection__card__button-primary:hover,
@@ -490,4 +490,8 @@ body {
 
 .collection__card__button-primary:hover {
   box-shadow: none;
+}
+
+.collection__card__button-secondary:hover {
+  border: 1px solid var(--core-heat-white);
 }
