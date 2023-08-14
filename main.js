@@ -164,7 +164,8 @@ const Header = {
    */
   initScroll() {
     function updateHeaderTransform() {
-      const { scrollY } = window;
+      var { scrollY } = window;
+
       const headerHeight = this.element.offsetHeight;
       let { previousScroll, currentTransform, offscreenSpeed, onscreenSpeed } =
         this.scroll;
@@ -173,6 +174,9 @@ const Header = {
         requestAnimationFrame(updateHeaderTransform);
         return;
       }
+
+      // Prevent overscrolling on iOS
+      if (scrollY < 0) scrollY = 0;
 
       if (scrollY > previousScroll) {
         // Scrolling down
