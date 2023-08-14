@@ -397,7 +397,10 @@ const Header = {
     const headerHeight = this.element.querySelector(
       ".global-header__wrapper"
     ).offsetHeight;
-    document.style.setProperty("--global-header-height", `${headerHeight}px`);
+    document.body.style.setProperty(
+      "--global-header-height",
+      `${headerHeight}px`
+    );
   },
 
   /**
