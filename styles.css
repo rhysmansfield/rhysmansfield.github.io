@@ -231,7 +231,7 @@ body {
   color: var(--core-heat-black);
   padding: 8px 36px;
   border-radius: 24px 0 12px 0;
-  transition: border-radius 250ms ease;
+  transition: border-radius 1000ms ease;
 }
 
 .collection__card:hover .collection__card__tag {
