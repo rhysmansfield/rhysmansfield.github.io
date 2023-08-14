@@ -1143,3 +1143,8 @@ header {
   border: 1px solid var(--core-heat-white);
   color: var(--core-heat-black);
 }
+
+.magnetic-button {
+  padding: 12px;
+  margin: -12px;
+}
