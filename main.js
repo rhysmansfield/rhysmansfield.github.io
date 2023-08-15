@@ -16,15 +16,39 @@ document.querySelectorAll(".collection__card").forEach((card) => {
       init: async function (swiper) {
         const wrapper = swiper.wrapperEl;
         const duration = 500;
-
-        wrapper.style.transitionDuration = `${duration}ms`;
-        wrapper.style.transform = "translate3d(-100px, 0px, 0px)";
-        await new Promise((resolve) => setTimeout(resolve, duration * 1.25));
         wrapper.style.transform = "translate3d(0px, 0px, 0px)";
-        await new Promise((resolve) => setTimeout(resolve, duration));
-        wrapper.style.transitionDuration = "0ms";
+        swiper.enabled = false;
 
-        swiper.update();
+        var observer = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach(async (entry) => {
+              if (!entry.isIntersecting) return;
+
+              wrapper.style.transitionDuration = `${duration}ms`;
+              wrapper.style.transform = "translate3d(-100px, 0px, 0px)";
+              await new Promise((resolve) =>
+                setTimeout(resolve, duration * 1.25)
+              );
+              wrapper.style.transform = "translate3d(0px, 0px, 0px)";
+              await new Promise((resolve) => setTimeout(resolve, duration));
+              wrapper.style.transitionDuration = "0ms";
+
+              // Enable interaction
+              swiper.enabled = true;
+              swiper.update();
+
+              // Remove observer
+              observer.unobserve(entry.target);
+            });
+          },
+          {
+            root: null,
+            threshold: 0,
+            rootMargin: "0px 0px -50% 0px",
+          }
+        );
+
+        observer.observe(wrapper);
       },
     },
   });
