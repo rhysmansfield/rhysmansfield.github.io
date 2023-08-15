@@ -239,24 +239,6 @@ body {
   }
 }
 
-.collection__card-swiper.swiper-initialized .swiper-wrapper {
-  animation: scrollHint 750ms ease 500ms;
-}
-
-@keyframes scrollHint {
-  0% {
-    transform: translate3d(0px, 0px, 0px);
-  }
-
-  75% {
-    transform: translate3d(-80px, 0, 0px);
-  }
-
-  100% {
-    transform: translate3d(0px, 0px, 0px);
-  }
-}
-
 .collection__card-swiper .swiper-slide {
   background-size: calc(100% + 24px);
   background-position: center;
