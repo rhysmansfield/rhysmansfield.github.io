@@ -3,9 +3,8 @@ gsap.registerPlugin(ScrollTrigger);
 document.querySelectorAll(".collection__card").forEach((card) => {
   const cardSwiper = card.querySelector(".collection__card-swiper");
   const swiper = new Swiper(cardSwiper, {
-    initialSlide: 0,
-    slidesPerView: 1,
     loop: true,
+    slidesPerView: 1,
     pagination: {
       el: card.querySelector(".collection__card__navigation-dots"),
       bulletClass: "collection__card__navigation-dot",
@@ -16,26 +15,29 @@ document.querySelectorAll(".collection__card").forEach((card) => {
       init: async function (swiper) {
         const wrapper = swiper.wrapperEl;
         const duration = 500;
-        wrapper.style.transform = "translate3d(0px, 0px, 0px)";
         swiper.enabled = false;
 
         var observer = new IntersectionObserver(
           (entries, observer) => {
             entries.forEach(async (entry) => {
               if (!entry.isIntersecting) return;
+              const currentTransformX = wrapper.style.transform.match(
+                /translate3d\((?<x>[-\d]+)px/
+              ).groups.x;
 
               wrapper.style.transitionDuration = `${duration}ms`;
-              wrapper.style.transform = "translate3d(-100px, 0px, 0px)";
+              wrapper.style.transform = `translate3d(${
+                currentTransformX - 100
+              }px, 0px, 0px)`;
               await new Promise((resolve) =>
                 setTimeout(resolve, duration * 1.25)
               );
-              wrapper.style.transform = "translate3d(0px, 0px, 0px)";
+              wrapper.style.transform = `translate3d(${currentTransformX}px, 0px, 0px)`;
               await new Promise((resolve) => setTimeout(resolve, duration));
               wrapper.style.transitionDuration = "0ms";
 
               // Enable interaction
               swiper.enabled = true;
-              swiper.update();
 
               // Remove observer
               observer.unobserve(entry.target);
