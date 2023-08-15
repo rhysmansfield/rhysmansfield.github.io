@@ -21,6 +21,10 @@ document.querySelectorAll(".collection__card").forEach((card) => {
           (entries, observer) => {
             entries.forEach(async (entry) => {
               if (!entry.isIntersecting) return;
+
+              // Remove observer
+              observer.unobserve(entry.target);
+
               const currentTransformX = wrapper.style.transform.match(
                 /translate3d\((?<x>[-\d]+)px/
               ).groups.x;
@@ -38,9 +42,6 @@ document.querySelectorAll(".collection__card").forEach((card) => {
 
               // Enable interaction
               swiper.enabled = true;
-
-              // Remove observer
-              observer.unobserve(entry.target);
             });
           },
           {
