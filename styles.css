@@ -253,7 +253,7 @@ body {
   }
 }
 
-.collection__card:hover .swiper-slide {
+.collection__card:hover .collection__card-swiper .swiper-slide {
   background-size: 100%;
 }
 
