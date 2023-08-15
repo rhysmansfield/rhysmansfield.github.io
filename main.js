@@ -2,6 +2,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 new Swiper(".collection__card-swiper", {
   slidesPerView: 1,
+  loop: true,
 });
 
 const header = document.querySelector(".collection__header");
