@@ -100,6 +100,8 @@ body {
 }
 
 .collection__header {
+  top: 0;
+  position: sticky;
   margin-bottom: 148px;
   text-align: center;
   scroll-snap-align: start;
@@ -107,6 +109,7 @@ body {
 
 @media (max-width: 1012px) {
   .collection__header {
+    position: relative;
     margin-bottom: 40px;
   }
 }
@@ -160,6 +163,11 @@ body {
     aspect-ratio: 366/480;
     border-radius: 12px;
     scroll-snap-align: start;
+    transition: scale 1000ms ease;
+  }
+
+  .collection__card:hover {
+    scale: 0.96;
   }
 }
 
@@ -263,7 +271,7 @@ body {
   position: absolute;
   z-index: 10;
   top: 0;
-  left: -1px;
+  left: 0;
   display: flex;
   align-items: center;
   gap: 6px;
