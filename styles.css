@@ -259,13 +259,15 @@ body {
 
 .collection__card-swiper .swiper-slide video {
   position: absolute;
-  width: 100%;
+  width: calc(100% + 24px);
   height: calc(100% + 24px);
+  max-width: none;
   object-fit: cover;
-  transition: height 1000ms ease;
+  transition: width 1000ms ease, height 1000ms ease;
 }
 
 .collection__card:hover .collection__card-swiper .swiper-slide video {
+  width: 100%;
   height: 100%;
 }
 
