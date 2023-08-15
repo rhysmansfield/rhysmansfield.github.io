@@ -465,7 +465,7 @@ body {
 .collection__card__details {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 2px;
   font: var(--desktop-diatype-b1);
   text-transform: uppercase;
   color: rgba(var(--core-heat-white-rgb), 0.8);
@@ -556,4 +556,52 @@ body {
 
 .collection__card__button-secondary:hover {
   border: 1px solid var(--core-heat-white);
+}
+
+.collection__card__navigation {
+  position: absolute;
+  z-index: 1;
+  bottom: 40px;
+  right: 40px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+@media (max-width: 1240px) {
+  .collection__card__navigation {
+    bottom: 24px;
+    right: 24px;
+  }
+}
+
+@media (max-width: 1012px) {
+  .collection__card__navigation {
+    display: none;
+  }
+}
+
+.collection__card__navigation-next,
+.collection__card__navigation-prev {
+  width: 16px;
+  cursor: pointer;
+}
+
+.collection__card__navigation-dots.swiper-pagination-bullets {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+}
+
+.collection__card__navigation-dot {
+  width: 8px;
+  height: 8px;
+  background: rgba(var(--core-heat-white-rgb), 0.24);
+  border-radius: 16px;
+  transition: background 300ms ease;
+}
+
+.collection__card__navigation-dot.active {
+  background: var(--core-heat-white);
 }
