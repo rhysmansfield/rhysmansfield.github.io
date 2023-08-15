@@ -159,6 +159,7 @@ body {
   .collection__card {
     aspect-ratio: 366/480;
     border-radius: 12px;
+    scroll-snap-align: start;
   }
 }
 
