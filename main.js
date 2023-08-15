@@ -191,6 +191,9 @@ const Header = {
       if (currentTransform > 0) currentTransform = 0;
       if (currentTransform < -headerHeight) currentTransform = -headerHeight;
 
+      // Round current transform to nearest pixel
+      currentTransform = Math.round(currentTransform);
+
       this.element.style.transform = `translateY(${currentTransform}px)`;
       this.scroll.currentTransform = currentTransform;
       this.scroll.previousScroll = previousScroll;
