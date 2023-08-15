@@ -159,7 +159,6 @@ body {
 
 @media (max-width: 1012px) {
   .collection__card {
-    aspect-ratio: 366/480;
     border-radius: 12px;
     scroll-snap-align: start;
     transition: scale 1000ms ease;
@@ -261,7 +260,7 @@ body {
 .collection__card-swiper .swiper-slide video {
   position: absolute;
   width: 100%;
-  height: calc(100% + 96px);
+  height: calc(100% + 24px);
   object-fit: cover;
   transition: height 1000ms ease;
 }
