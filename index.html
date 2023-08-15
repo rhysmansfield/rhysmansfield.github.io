@@ -10,11 +10,16 @@
 
     <title>Heat</title>
 
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8.3.2/swiper-bundle.min.css"
+    />
     <link rel="stylesheet" href="/reset.css" />
     <link rel="stylesheet" href="/header/styles.css" />
     <link rel="stylesheet" href="/styles.css" />
 
     <script src="https://unpkg.co/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8.3.2/swiper-bundle.min.js"></script>
     <script type="module" src="/header/main.js"></script>
     <script type="module" src="/main.js"></script>
 
@@ -3042,11 +3047,24 @@
           class="collection__cards"
           style="display: flex; flex-direction: column; gap: 16px"
         >
-          <div
-            href="/"
-            class="collection__card"
-            style="background-image: url('https://i.imgur.com/W0m6K7m.jpeg')"
-          >
+          <div href="/" class="collection__card">
+            <div class="collection__card__swiper swiper">
+              <div class="swiper-wrapper">
+                <div
+                  class="swiper-slide"
+                  style="
+                    background-image: url('https://i.imgur.com/W0m6K7m.jpeg');
+                  "
+                ></div>
+                <div
+                  class="swiper-slide"
+                  style="
+                    background-image: url('https://i.imgur.com/W0m6K7m.jpeg');
+                  "
+                ></div>
+              </div>
+            </div>
+
             <div class="collection__card__tag">
               <div class="collection__card__tag-pulse"></div>
               <div class="collection__card__tag-text">
