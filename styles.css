@@ -155,10 +155,13 @@ body {
 .collection__card {
   position: relative;
   width: 100%;
+  background: var(--core-heat-black);
+  aspect-ratio: 1760/880;
 }
 
 @media (max-width: 1012px) {
   .collection__card {
+    aspect-ratio: 366/480;
     border-radius: 12px;
     scroll-snap-align: start;
     transition: scale 500ms ease;

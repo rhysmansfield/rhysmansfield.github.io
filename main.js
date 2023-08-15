@@ -1,6 +1,6 @@
 gsap.registerPlugin(ScrollTrigger);
 
-document.querySelectorAll(".collection__card").forEach((card) => {
+document.querySelectorAll(".collection__card").forEach((card, index) => {
   const cardSwiper = card.querySelector(".collection__card-swiper");
   const swiper = new Swiper(cardSwiper, {
     loop: true,
@@ -12,47 +12,46 @@ document.querySelectorAll(".collection__card").forEach((card) => {
       clickable: true,
     },
     on: {
-      init: async function (swiper) {
-        const wrapper = swiper.wrapperEl;
-        const duration = 500;
-        swiper.enabled = false;
+      init:
+        index === 0 &&
+        function (swiper) {
+          const wrapper = swiper.wrapperEl;
+          const delay = 600;
+          const duration = 500;
+          swiper.enabled = false;
 
-        var observer = new IntersectionObserver(
-          (entries, observer) => {
-            entries.forEach(async (entry) => {
-              if (!entry.isIntersecting) return;
+          var video = wrapper.querySelector("video");
+          if (video) {
+            // Wait for video to load
+            video.addEventListener("loadeddata", async () => {
+              // Add additonal delay
+              await new Promise((resolve) => setTimeout(resolve, delay));
 
-              // Remove observer
-              observer.unobserve(entry.target);
-
+              // Get current transform
               const currentTransformX = wrapper.style.transform.match(
                 /translate3d\((?<x>[-\d]+)px/
               ).groups.x;
 
+              // Move transform 100px
               wrapper.style.transitionDuration = `${duration}ms`;
               wrapper.style.transform = `translate3d(${
                 currentTransformX - 100
               }px, 0px, 0px)`;
+
+              // Wait for transition to finish
               await new Promise((resolve) =>
                 setTimeout(resolve, duration * 1.25)
               );
+
+              // Reset transform
               wrapper.style.transform = `translate3d(${currentTransformX}px, 0px, 0px)`;
               await new Promise((resolve) => setTimeout(resolve, duration));
               wrapper.style.transitionDuration = "0ms";
 
-              // Enable interaction
               swiper.enabled = true;
             });
-          },
-          {
-            root: null,
-            threshold: 0,
-            rootMargin: "0px 0px -50% 0px",
           }
-        );
-
-        observer.observe(wrapper);
-      },
+        },
     },
   });
 
