@@ -244,6 +244,7 @@ body {
   aspect-ratio: 1760/880;
   background-size: calc(100% + 24px);
   background-position: center;
+  overflow: hidden;
   transition: background-size 1000ms ease;
 }
 
