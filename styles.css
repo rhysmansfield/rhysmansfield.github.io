@@ -463,6 +463,9 @@ body {
 }
 
 .collection__card__details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   font: var(--desktop-diatype-b1);
   text-transform: uppercase;
   color: rgba(var(--core-heat-white-rgb), 0.8);
@@ -478,6 +481,7 @@ body {
 @media (max-width: 1012px) {
   .collection__card__details {
     font: var(--mobile-diatype-b2);
+    gap: 3px;
   }
 }
 
