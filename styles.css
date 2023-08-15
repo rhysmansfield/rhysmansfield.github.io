@@ -240,10 +240,10 @@ body {
 }
 
 .collection__card-swiper.swiper-initialized .swiper-wrapper {
-  animation: showScroll 750ms ease 1000ms;
+  animation: scrollHint 750ms ease 500ms;
 }
 
-@keyframes showScroll {
+@keyframes scrollHint {
   0% {
     transform: translate3d(0px, 0px, 0px);
   }
