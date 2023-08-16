@@ -75,8 +75,8 @@ if (window.innerWidth >= 768) {
     opacity: 0,
     scrollTrigger: {
       trigger: header,
-      start: `bottom+=75% center`,
-      end: `bottom+=150% center`,
+      start: `top+=25% top`,
+      end: `bottom+=25% top`,
       scrub: true,
     },
   });
