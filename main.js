@@ -23,7 +23,7 @@ document.querySelectorAll(".collection__card").forEach((card, index) => {
           var video = wrapper.querySelector("video");
           if (video) {
             // Wait for video to load
-            video.addEventListener("loadeddata", async () => {
+            video.addEventListener("play", async () => {
               // Add additonal delay
               await new Promise((resolve) => setTimeout(resolve, delay));
 
