@@ -141,8 +141,7 @@ body {
 }
 
 .collection__card {
-  position: sticky;
-  top: 16px;
+  position: relative;
   width: 100%;
   background: var(--core-heat-black);
   aspect-ratio: 1760/880;
