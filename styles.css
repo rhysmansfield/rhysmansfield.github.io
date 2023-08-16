@@ -187,6 +187,7 @@ body {
 }
 
 .collection__card .collection__card-wrapper {
+  max-height: calc(100vh - var(--global-header-height) - 12px - 80px);
   height: 100%;
   transition: scale 500ms ease;
 }
