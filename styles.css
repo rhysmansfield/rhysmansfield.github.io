@@ -412,7 +412,7 @@ body {
   right: 44px;
   width: 32px;
   height: 32px;
-  background: rgba(var(--core-heat-white), 0.16);
+  background: rgba(var(--core-heat-white), 0.32);
 }
 
 @media (max-width: 1240px) {
