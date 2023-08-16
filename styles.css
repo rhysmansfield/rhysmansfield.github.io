@@ -187,6 +187,7 @@ body {
 }
 
 .collection__card .collection__card-wrapper {
+  height: 100%;
   transition: scale 500ms ease;
 }
 
