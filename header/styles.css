@@ -58,6 +58,7 @@
 body {
   --global-header-height: 61px;
   background: var(--core-heat-black);
+  width: 100%;
 }
 
 @media (max-width: 1012px) {
