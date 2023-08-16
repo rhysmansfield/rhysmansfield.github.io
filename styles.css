@@ -88,7 +88,7 @@ body {
   .collection__wrapper {
     max-height: 100vh;
     overflow: auto;
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: y proximity;
     scroll-padding-top: calc(var(--global-header-height) + 8px);
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -159,16 +159,16 @@ body {
   aspect-ratio: 1760/880;
 }
 
+.collection__card:active {
+  scale: 0.98;
+}
+
 @media (max-width: 1012px) {
   .collection__card {
     aspect-ratio: 366/480;
     border-radius: 12px;
     scroll-snap-align: start;
     transition: scale 500ms ease;
-  }
-
-  .collection__card:active {
-    scale: 0.98;
   }
 }
 
