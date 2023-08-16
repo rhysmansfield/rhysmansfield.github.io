@@ -403,6 +403,16 @@ body {
   border-radius: 100%;
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
+  transition: top 250ms ease, right 250ms ease, width 250ms ease,
+    height 250ms ease, background 250ms ease;
+}
+
+.collection__card-action:hover {
+  top: 44px;
+  right: 44px;
+  width: 32px;
+  height: 32px;
+  background: rgba(var(--core-heat-white), 0.16);
 }
 
 @media (max-width: 1240px) {
