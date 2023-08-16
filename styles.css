@@ -85,18 +85,6 @@ body {
 }
 
 @media (max-width: 544px) {
-  .collection__wrapper {
-    max-height: 100vh;
-    overflow: auto;
-    scroll-snap-type: y proximity;
-    scroll-padding-top: calc(var(--global-header-height) + 8px);
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .collection__wrapper::-webkit-scrollbar {
-    display: none;
-  }
 }
 
 .collection__header {
