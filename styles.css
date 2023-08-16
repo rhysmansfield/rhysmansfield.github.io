@@ -474,7 +474,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  font: var(--desktop-diatype-b2);
+  font: var(--desktop-diatype-b1);
   text-transform: uppercase;
   color: rgba(var(--core-heat-white-rgb), 0.8);
   margin-bottom: 24px;
