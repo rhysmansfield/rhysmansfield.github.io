@@ -191,6 +191,7 @@ body {
 }
 
 .collection__card-swiper {
+  display: block;
   width: 100%;
   height: 100%;
   border-radius: 24px;
