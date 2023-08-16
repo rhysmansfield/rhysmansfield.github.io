@@ -23,7 +23,7 @@ document.querySelectorAll(".collection__card").forEach((card, index) => {
           var video = wrapper.querySelector("video");
           if (video) {
             // Wait for video to load
-            video.addEventListener("play", async () => {
+            async function scrollHint() {
               // Add additonal delay
               await new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -49,7 +49,12 @@ document.querySelectorAll(".collection__card").forEach((card, index) => {
               wrapper.style.transitionDuration = "0ms";
 
               swiper.enabled = true;
-            });
+
+              // remove event listener
+              video.removeEventListener("play", scrollHint);
+            }
+
+            video.addEventListener("play", scrollHint);
           }
         },
     },
