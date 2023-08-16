@@ -308,6 +308,11 @@ body {
   transition: border-radius 1000ms ease;
 }
 
+.collection__card__tag.transparent {
+  background: rgba(var(--core-heat-white-rgb), 0.16);
+  color: var(--core-heat-white);
+}
+
 @media (max-width: 1012px) {
   .collection__card__tag {
     padding: 8px 12px;
@@ -523,6 +528,24 @@ body {
 
 .collection__card__details-value {
   color: var(--core-heat-white);
+}
+
+.collection__card__description {
+  font: var(--desktop-diatype-b2);
+  color: rgba(var(--core-heat-white-rgb), 0.8);
+  margin-bottom: 24px;
+}
+
+@media (max-width: 1240px) {
+  .collection__card__description {
+    margin-bottom: 18px;
+  }
+}
+
+@media (max-width: 1012px) {
+  .collection__card__description {
+    font: var(--mobile-diatype-b2);
+  }
 }
 
 .collection__card__button-wrapper {
