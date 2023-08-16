@@ -157,6 +157,24 @@ body {
   width: 100%;
   background: var(--core-heat-black);
   aspect-ratio: 1760/880;
+  border-radius: 24px;
+  transition: border-radius 1000ms ease, scale 500ms ease;
+}
+
+@media (max-width: 1012px) {
+  .collection__card {
+    border-radius: 12px;
+  }
+}
+
+.collection__card:hover {
+  border-radius: 32px;
+}
+
+@media (max-width: 1012px) {
+  .collection__card:hover {
+    border-radius: 24px;
+  }
 }
 
 .collection__card:active {
@@ -168,7 +186,6 @@ body {
     aspect-ratio: 366/480;
     border-radius: 12px;
     scroll-snap-align: start;
-    transition: scale 500ms ease;
   }
 }
 
@@ -303,7 +320,7 @@ body {
 
 @media (max-width: 1012px) {
   .collection__card:hover .collection__card__tag {
-    border-radius: 24px 0;
+    border-radius: 24px 0 12px 0;
   }
 }
 
