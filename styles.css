@@ -243,6 +243,7 @@ body {
       rgba(23, 24, 29, 0) 0%,
       rgba(23, 24, 29, 0.8) 100%
     );
+    opacity: 1;
     border-radius: 12px;
   }
 }
