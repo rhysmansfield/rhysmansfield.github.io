@@ -404,7 +404,7 @@ body {
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   transition: top 250ms ease, right 250ms ease, width 250ms ease,
-    height 250ms ease, background 250ms ease;
+    height 250ms ease, padding 250ms ease, background 250ms ease;
 }
 
 .collection__card-action:hover {
@@ -412,6 +412,7 @@ body {
   right: 44px;
   width: 32px;
   height: 32px;
+  padding: 4px;
   background: rgba(var(--core-heat-white), 0.32);
 }
 
@@ -425,6 +426,7 @@ body {
   .collection__card-action:hover {
     top: 28px;
     right: 28px;
+    padding: 2px;
   }
 }
 
@@ -446,6 +448,7 @@ body {
     right: 18px;
     width: 20px;
     height: 20px;
+    padding: 0;
   }
 }
 
