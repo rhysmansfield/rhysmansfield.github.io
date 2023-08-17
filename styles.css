@@ -311,6 +311,8 @@ body {
 .collection__card__tag.transparent {
   background: rgba(var(--core-heat-white-rgb), 0.16);
   color: var(--core-heat-white);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
 }
 
 @media (max-width: 1012px) {
