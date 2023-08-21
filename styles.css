@@ -608,7 +608,7 @@ header {
   position: relative;
   align-self: flex-end;
   font: var(--desktop-diatype-b2);
-  text-transform: uppercase;
+  text-transform: capitalize;
   color: rgba(var(--core-heat-white-rgb), 0.6);
 }
 
