@@ -1225,6 +1225,7 @@ document
       loop: true,
       slidesPerView: 2,
       spaceBetween: 12,
+      allowTouchMove: true,
       navigation: {
         prevEl: swiperPrev,
         nextEl: swiperNext,
