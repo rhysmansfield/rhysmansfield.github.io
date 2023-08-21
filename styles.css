@@ -481,7 +481,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 24px;
+  gap: 16px;
   min-width: calc(120px + 24px);
   padding-right: 24px;
   margin-right: 24px;
@@ -544,12 +544,19 @@ header {
   display: grid;
   width: 100%;
   grid-template-columns: minmax(0, 1fr) auto;
+  padding-right: calc(320px - 80px);
+}
+
+@media (max-width: 1280px) {
+  .global-header__mega-menu__item-products {
+    padding-right: 160px;
+  }
 }
 
 .global-header__mega-menu__item-products__swiper {
   position: relative;
   display: flex;
-  align-items: center;
+  /*align-items: center;*/
   width: calc(100% + 48px);
   gap: 24px;
   margin-left: -48px;
