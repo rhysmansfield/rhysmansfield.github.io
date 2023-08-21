@@ -469,7 +469,7 @@ header {
   height: auto;
   pointer-events: auto;
   opacity: 1;
-  padding: 40px 0;
+  padding: 40px 0 64px;
   opacity: 1;
 }
 
@@ -545,9 +545,10 @@ header {
   width: 100%;
   grid-template-columns: minmax(0, 1fr) auto;
   padding-right: calc(320px - 80px);
+  margin-bottom: 24px;
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 1440px) {
   .global-header__mega-menu__item-products {
     padding-right: 160px;
   }
