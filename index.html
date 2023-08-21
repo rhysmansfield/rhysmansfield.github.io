@@ -10,10 +10,15 @@
 
     <title>Heat</title>
 
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8.3.2/swiper-bundle.min.css"
+    />
     <link rel="stylesheet" href="/reset.css" />
     <link rel="stylesheet" href="/styles.css" />
 
     <script src="https://unpkg.co/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8.3.2/swiper-bundle.min.js"></script>
     <script type="module" src="/main.js"></script>
 
     <!-- FONT IMPORT (IGNORE) -->
@@ -297,11 +302,48 @@
           </div>
           <div data-menu="2" class="global-header__mega-menu__item">
             <div class="global-header__mega-menu__item-products">
-              <div
-                class="global-header__mega-menu__item-products__swiper"
-                style="width: 100%"
-              >
-                Content
+              <div class="global-header__mega-menu__item-products__swiper">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  class="swiper-navigation-prev"
+                >
+                  <path stroke="#EBF4F7" stroke-width="1.5" d="m16 4-8 8 8 8" />
+                </svg>
+                <div class="swiper" style="width: 100%">
+                  <div class="swiper-wrapper">
+                    <div
+                      class="swiper-slide"
+                      style="background: white; aspect-ratio: 400/240"
+                    ></div>
+                    <div
+                      class="swiper-slide"
+                      style="background: white; aspect-ratio: 400/240"
+                    ></div>
+                    <div
+                      class="swiper-slide"
+                      style="background: white; aspect-ratio: 400/240"
+                    ></div>
+                    <div
+                      class="swiper-slide"
+                      style="background: white; aspect-ratio: 400/240"
+                    ></div>
+                    <div
+                      class="swiper-slide"
+                      style="background: white; aspect-ratio: 400/240"
+                    ></div>
+                  </div>
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  class="swiper-navigation-next"
+                >
+                  <path stroke="#EBF4F7" stroke-width="1.5" d="m8 20 8-8-8-8" />
+                </svg>
+                <div class="swiper-pagination"></div>
               </div>
 
               <div class="global-header__mega-menu__item-list">

@@ -268,6 +268,10 @@ const Header = {
 
       this.closeMegaMenu(openMenu.link, openMenu.content);
     });
+
+    window.addEventListener("resize", () => {
+      this.updateMegaMenuHeight();
+    });
   },
 
   /**
@@ -1206,3 +1210,33 @@ MagneticButtons.init(".magnetic-button");
 CountrySelector.init();
 MobileCountrySelector.init();
 Header.init();
+
+document
+  .querySelectorAll(".global-header__mega-menu__item-products")
+  .forEach((container) => {
+    const swiperEl = container.querySelector(".swiper");
+
+    const swiperPrev = container.querySelector(".swiper-navigation-prev");
+    const swiperNext = container.querySelector(".swiper-navigation-next");
+
+    const pagination = container.querySelector(".swiper-pagination");
+
+    const swiper = new Swiper(swiperEl, {
+      loop: true,
+      slidesPerView: 2,
+      spaceBetween: 12,
+      navigation: {
+        prevEl: swiperPrev,
+        nextEl: swiperNext,
+      },
+      pagination: {
+        el: pagination,
+        clickable: true,
+      },
+      breakpoints: {
+        1280: {
+          slidesPerView: 3,
+        },
+      },
+    });
+  });
