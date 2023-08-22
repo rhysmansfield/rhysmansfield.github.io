@@ -1247,7 +1247,7 @@ header {
   height: 100%;
   overflow: hidden;
   border-radius: 12px;
-  border: 1px solid transparent;
+  border: 1px solid rgba(var(--core-heat-white-rgb), 0.8);
   transition: border-radius 600ms ease;
 }
 
