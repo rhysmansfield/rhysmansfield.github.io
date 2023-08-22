@@ -1225,6 +1225,8 @@ header {
   position: relative;
   width: 100%;
   height: 100%;
+  aspect-ratio: 400 / 240;
+  max-height: 500px;
 }
 
 .global-header__mega-menu__item-products__swiper .collection__card-wrapper {
