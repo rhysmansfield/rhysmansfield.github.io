@@ -1400,7 +1400,7 @@ header {
   height: 28px;
 }
 
-@media (max-width: 1600px) {
+@media (max-width: 1920px) {
   .global-header__mega-menu__item-products__swiper .collection__card-action {
     top: 12px;
     right: 12px;
@@ -1420,7 +1420,7 @@ header {
   left: 16px;
 }
 
-@media (max-width: 1600px) {
+@media (max-width: 1920px) {
   .global-header__mega-menu__item-products__swiper .collection__card-content {
     bottom: 12px;
     left: 12px;
