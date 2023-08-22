@@ -1248,7 +1248,7 @@ header {
   overflow: hidden;
   border-radius: 12px;
   border: 1px solid transparent;
-  transition: border-radius 1000ms ease;
+  transition: border-radius 600ms ease;
 }
 
 .global-header__mega-menu__item-products__swiper
@@ -1276,7 +1276,7 @@ header {
   opacity: 0.75;
   border-radius: 12px;
   pointer-events: none;
-  transition: opacity 1000ms ease, border-radius 1000ms ease;
+  transition: opacity 600ms ease, border-radius 600ms ease;
 }
 .global-header__mega-menu__item-products__swiper .collection__card:hover a {
   border-radius: 16px;
@@ -1297,7 +1297,7 @@ header {
   max-width: none;
   object-fit: cover;
   border-radius: 12px;
-  transition: border-radius 1000ms ease, width 1000ms ease, height 1000ms ease;
+  transition: border-radius 600ms ease, width 600ms ease, height 600ms ease;
 }
 
 .global-header__mega-menu__item-products__swiper .collection__card:hover video,
@@ -1321,7 +1321,7 @@ header {
   color: var(--core-heat-black);
   padding: 6px 12px;
   border-radius: 12px 0;
-  transition: border-radius 1000ms ease;
+  transition: border-radius 600ms ease;
 }
 
 .global-header__mega-menu__item-products__swiper
