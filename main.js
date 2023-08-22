@@ -1235,7 +1235,7 @@ document
         clickable: true,
       },
       breakpoints: {
-        1280: {
+        1440: {
           slidesPerView: 3,
         },
       },
