@@ -1263,8 +1263,8 @@ header {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: calc(100% + 1px);
+  height: calc(100% + 1px);
   display: block;
   background: linear-gradient(
     180deg,
@@ -1394,10 +1394,10 @@ header {
 
 .global-header__mega-menu__item-products__swiper
   .collection__card-action:hover {
-  top: 16px;
-  right: 16px;
-  width: 24px;
-  height: 24px;
+  top: 14px;
+  right: 14px;
+  width: 28px;
+  height: 28px;
 }
 
 .global-header__mega-menu__item-products__swiper .collection__card-content {
