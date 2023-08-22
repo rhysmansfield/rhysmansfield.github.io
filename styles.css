@@ -1384,8 +1384,8 @@ header {
 .global-header__mega-menu__item-products__swiper .collection__card-action {
   position: absolute;
   z-index: 10;
-  top: 12px;
-  right: 12px;
+  top: 16px;
+  right: 16px;
   width: 32px;
   height: 32px;
   cursor: pointer;
@@ -1394,17 +1394,37 @@ header {
 
 .global-header__mega-menu__item-products__swiper
   .collection__card-action:hover {
-  top: 14px;
-  right: 14px;
+  top: 18px;
+  right: 18px;
   width: 28px;
   height: 28px;
+}
+
+@media (max-width: 1600px) {
+  .global-header__mega-menu__item-products__swiper .collection__card-action {
+    top: 12px;
+    right: 12px;
+  }
+
+  .global-header__mega-menu__item-products__swiper
+    .collection__card-action:hover {
+    top: 14px;
+    right: 14px;
+  }
 }
 
 .global-header__mega-menu__item-products__swiper .collection__card-content {
   position: absolute;
   z-index: 10;
-  bottom: 12px;
-  left: 12px;
+  bottom: 16px;
+  left: 16px;
+}
+
+@media (max-width: 1600px) {
+  .global-header__mega-menu__item-products__swiper .collection__card-content {
+    bottom: 12px;
+    left: 12px;
+  }
 }
 
 .global-header__mega-menu__item-products__swiper .collection__card-title {
